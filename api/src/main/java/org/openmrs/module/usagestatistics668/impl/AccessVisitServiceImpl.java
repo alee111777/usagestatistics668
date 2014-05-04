@@ -1,12 +1,10 @@
 package org.openmrs.module.usagestatistics668.impl;
 
-import java.util.Date;
-import java.util.List;
 import org.openmrs.api.APIException;
 import org.openmrs.api.impl.BaseOpenmrsService;
-import org.openmrs.module.usagestatistics668.AccessPatient;
-import org.openmrs.module.usagestatistics668.AccessPatientService;
-import org.openmrs.module.usagestatistics668.db.AccessPatientDAO;
+import org.openmrs.module.usagestatistics668.AccessVisit;
+import org.openmrs.module.usagestatistics668.AccessVisitService;
+import org.openmrs.module.usagestatistics668.db.AccessVisitDAO;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -29,9 +27,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Ye
+ * @author Jonathan
  */
-public class AccessPatientServiceImpl extends BaseOpenmrsService implements AccessPatientService {
+public class AccessVisitServiceImpl extends BaseOpenmrsService implements AccessVisitService {
 
 	/**
 	 * This "dao" object is set by spring. See the
@@ -39,7 +37,7 @@ public class AccessPatientServiceImpl extends BaseOpenmrsService implements Acce
 	 * can assume that this will never be null, even though it never gets set in
 	 * here. This is called Inversion of Control (IoC)
 	 */
-	private AccessPatientDAO dao;
+	private AccessVisitDAO dao;
 
 	/**
 	 * This is the method that spring calls to set the DAO
@@ -47,24 +45,19 @@ public class AccessPatientServiceImpl extends BaseOpenmrsService implements Acce
 	 * @param dao
 	 *            the dao to set
 	 */
-	public void setDao(AccessPatientDAO dao) {
+	public void setDao(AccessVisitDAO dao) {
 		this.dao = dao;
 	}
 
         @Transactional(readOnly = true)
-	public AccessPatient getAccessPatient(Integer id) {
-		return dao.getAccessPatient(id);
+	public AccessVisit getAccessVisit(Integer id) {
+		return dao.getAccessVisit(id);
 	}
 
 	@Override
-	public void saveAccessPatient(AccessPatient accessPatient)throws APIException {
-		dao.saveAccessPatient(accessPatient);
+	public void saveAccessVisit(AccessVisit accessVisit)throws APIException {
+		dao.saveAccessVisit(accessVisit);
 	}
-
-        @Override
-        public List<Object[]> getMostViewedPatient(Date since, int maxResults) throws APIException {
-            return dao.getMostViewedPatient(since, maxResults);
-    }
 
 }
 

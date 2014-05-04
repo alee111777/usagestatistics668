@@ -7,7 +7,6 @@
 package org.openmrs.module.usagestatistics668;
 
 import java.util.Date;
-import org.openmrs.User;
 
 /**
  *
@@ -16,73 +15,31 @@ import org.openmrs.User;
 public class AccessPatient{
     
     protected Integer id;
-    protected Date date;
-    protected char viewed_edited;
-    protected Integer encounter_id;
+    protected Date timestamp;
+    protected String access_type;
     protected Integer user_id;
     protected Integer patient_id;
-    protected Integer location_id;
+    //protected Integer location_id;
     
     //Default constructor
-    public AccessPatient(){
-        
-    }
+    public AccessPatient(){}
+    
+   public Integer getId() { return this.id; }
+   public void setId(Integer id) { this.id = id; }
    
-    
-    public Integer getId(){
-        return id;
-    }
-    
-    public void setId(int id){
-        this.id = id;
-    }
-    
-    public Date getDate(){
-        return date;
-    }
-    
-    public void setDate(Date date){
-        this.date = date;
-    }
-    
-    public char getViewed_edited(){
-        return viewed_edited;
-    }
-    
-    public void setViewed_edited(char viewed_edited){
-        this.viewed_edited = viewed_edited;
-    }
-    
-    public Integer getEncounter_id(){
-        return encounter_id;
-    }
-    
-    public void setEncounter_id(Integer encounter_id){
-        this.encounter_id = encounter_id;
-    }
-    
-    public Integer getUser_id(){
-        return user_id;
-    }
-    
-    public void setUser_id(Integer user_id){
-        this.user_id = user_id;
-    }
-    
-    public Integer getPatient_id(){
-        return patient_id;
-    }
-    
-    public void setPatient_id(Integer patient_id){
-        this.patient_id = patient_id;
-    }
-    
-    public Integer getLocation_id(){
-        return location_id;
-    }
-    
-    public void setLocation_id(Integer location_id){
-        this.location_id = location_id;
-    }
+   public Date getTimestamp() { return this.timestamp; }
+   public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
+   
+   public Integer getPatient_id() { return this.patient_id; }
+   public void setPatient_id(Integer patient_id) { this.patient_id = patient_id; }
+   
+   public String getAccess_type() { return this.access_type; }
+   public void setAccess_type(String type) { this.access_type = type; }
+   
+   public Integer getUser_id() { return this.user_id; }
+   public void setUser_id(Integer user_id) { this.user_id = user_id; }
+   
+   //public Integer getLocation_id() { return this.location_id; }
+   //public void setLocation_id(Integer location_id) { this.location_id = location_id; }
 }
 

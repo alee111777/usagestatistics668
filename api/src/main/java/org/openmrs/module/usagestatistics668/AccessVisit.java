@@ -6,7 +6,7 @@
 
 package org.openmrs.module.usagestatistics668;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -15,70 +15,42 @@ import java.sql.Date;
 public class AccessVisit {
     
     protected Integer id;
-    protected Date date;
-    protected char view_edited;
+    protected Date timestamp;
+    protected String access_type;
     protected Integer visit_id;
     protected Integer user_id;
     protected Integer patient_id;
     protected Integer location_id;
     
     //Default constructor
-    public AccessVisit(){
-        
-    }
+    public AccessVisit(){    }
 
-    public Integer getId(){
-        return id;
-    }
+    public Integer getId(){return id;}
     
-    public void setId(Integer id){
-        this.id = id;
-    }
+    public void setId(Integer id){this.id = id;}
     
-    public Date getDate(){
-        return date;
-    }
+    public Date getTimestamp(){return timestamp;}
     
-    public void setDate(Date date){
-        this.date = date;
-    }
+    public void setTimestamp(Date timestamp){this.timestamp = timestamp;}
     
-    public char getView_edited(){
-        return view_edited;
-    }
+    public String getAccess_type(){return access_type;}
     
-    public void setViewed_edited(char view_edited){
-        this.view_edited = view_edited;
-    }
+    public void setAccess_type(String access_type){this.access_type = access_type;}
     
-    public Integer getVisit_id(){
-        return visit_id;
-    }
+    public Integer getVisit_id(){return visit_id;}
     
-    public void setVisit_id(Integer visit_id){
-        this.visit_id = visit_id;
-    }
+    public void setVisit_id(Integer visit_id){this.visit_id = visit_id;}
     
-    public Integer getUser_id(){
-        return user_id;
-    }
+    public Integer getUser_id(){return user_id;}
     
-    public void setUser_id(Integer user_id){
-        this.user_id = user_id;
-    }
+    public void setUser_id(Integer user_id){this.user_id = user_id;}
     
-    public Integer getPatient_id(){
-        return patient_id;
-    }
+    public Integer getPatient_id(){return patient_id;}
     
-    public void setPatient_id(Integer patient_id){
-        this.patient_id = patient_id;
-    }
+    public void setPatient_id(Integer patient_id){this.patient_id = patient_id;}
     
-    public Integer getLocation_id(){
-        return location_id;
-    }
-    public void setLocation_id(Integer location_id){
-        this.location_id = location_id;
-    }
+    public Integer getLocation_id(){return location_id;}
+    
+    public void setLocation_id(Integer location_id){this.location_id = location_id;}
+    
 }

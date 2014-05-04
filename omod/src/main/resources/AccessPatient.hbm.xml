@@ -12,16 +12,13 @@
 			<generator class="native" />
 		</id>
 		
-		<property name="date" not-null="true" type="java.util.Date" column="date" />
+		<property name="timestamp" not-null="true" type="java.util.Date" column="timestamp" />
 		
-		<property name="viewed_edited" not-null="true" type="char" column="viewed_edited" />
+		<property name="access_type" not-null="true" type="java.lang.String" column="access_type" />
 		
 		<property name="user_id" not-null="true" type="int" column="user_id" />
-                
-                <property name="encounter_id" not-null="true" type="int" column="encounter_id" />
 		
 		<property name="patient_id" not-null="true" type="int" column="patient_id" />
 		
-		<property name="location_id" not-null="true" type="int" column="location_id" />
 	</class>
 </hibernate-mapping>

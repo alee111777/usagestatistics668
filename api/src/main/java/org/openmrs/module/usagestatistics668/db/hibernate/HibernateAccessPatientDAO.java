@@ -6,6 +6,11 @@
 
 package org.openmrs.module.usagestatistics668.db.hibernate;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.openmrs.module.usagestatistics668.AccessPatient;
 import org.openmrs.module.usagestatistics668.db.AccessPatientDAO;
@@ -16,6 +21,8 @@ import org.openmrs.module.usagestatistics668.db.AccessPatientDAO;
  */
 public class HibernateAccessPatientDAO implements AccessPatientDAO {
    private SessionFactory sessionFactory;
+   protected static final String TABLE_PATIENT = "access_patient";
+   protected static final SimpleDateFormat dfSQL = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * This is a Hibernate object. It gives us metadata about the currently
@@ -39,9 +46,30 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
    }
 
    public void saveAccessPatient(AccessPatient accessPatient) {
-		sessionFactory.getCurrentSession().saveOrUpdate(accessPatient);
+       sessionFactory.getCurrentSession().saveOrUpdate(accessPatient);
 		
       //return accessPatient;
    }
+
+   public List<Object[]> getMostViewedPatient(Date since, int maxResults) {
+  		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT ");
+		sb.append("  patient_id, ");
+		sb.append("  count( * ) AS count ");
+		sb.append("FROM " + TABLE_PATIENT);
+                if (since != null)
+                    sb.append("  WHERE `timestamp` > '" + dfSQL.format(since) + "' ");
+		sb.append(" GROUP BY patient_id ");
+                sb.append("ORDER BY count DESC ");
+                sb.append("LIMIT " + maxResults);
+	
+		return executeSQLQuery(sb.toString());
+   }
+    
+    protected List<Object[]> executeSQLQuery(String sql) {	
+	Session session = sessionFactory.getCurrentSession();
+	SQLQuery query = session.createSQLQuery(sql);
+	return query.list();
+    }
    
 }
