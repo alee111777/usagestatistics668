@@ -46,18 +46,21 @@
 			<th align="center"><spring:message code="usagestatistics668.results.encounter"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.void"/></th>
 		</tr>
-                <c:forEach items="${stats}" var="row" varStatus="rowStatus">
-			<tr class="<c:choose><c:when test="${rowStatus.index % 2 == 0}">evenRow</c:when><c:otherwise>oddRow</c:otherwise></c:choose>">
-				<td><a href="encounterAccess.htm?from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;userId=${row[0]}">${row[1]}</a></td>
-				<td align="center">${row[2]}</td>
-				<td align="center">${row[3]}</td>
-				<td align="center">${row[4]}</td>
-				<td align="center">${row[5]}</td>
-				<td align="center">${row[6]}</td>
-				<td align="center">${privacy:formatDate(row[7])}</td>
-			</tr>	
-		</c:forEach>
-		<c:if test="${empty stats}">
+
+                <c:forEach items="${encounterList}" var="row" varStatus="rowStatus" >
+                   <tr>
+                   <td align="center">${row.access_type}</td>
+                   <td align="center">${row.timestamp}</td>
+                   <td align="center">${userList[rowStatus.index]}</td>
+                   <td align="center">${patientList[rowStatus.index]}</td>
+                   <td>n/a</td>
+                   <td>n/a</td>
+                   <tr>
+                </c:forEach>
+                
+                <br/>${userList[rowNum]}<br/>
+                
+		<c:if test="${empty encounterList}">
 			<tr>
 				<td colspan="8" style="padding: 10px; text-align: center"><spring:message code="usagestatistics668.noresults"/></td>
 			</tr>

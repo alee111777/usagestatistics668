@@ -65,4 +65,8 @@ public class AccessEncounterServiceImpl extends BaseOpenmrsService implements Ac
       dao.saveAccessEncounter(accessEncounter);
    }
 
+   public List<AccessEncounter> getMostRecent(int numOfEncounters) {
+      return dao.getMostRecent(numOfEncounters);
+   }
+
 }

@@ -6,6 +6,7 @@
 
 package org.openmrs.module.usagestatistics668.db;
 
+import java.util.List;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
 
 /**
@@ -21,7 +22,7 @@ public interface AccessEncounterDAO {
    public AccessEncounter getAccessEncounter(Integer id);
    
    public void saveAccessEncounter(AccessEncounter accessEncounter);
-   
-
+  
+   public List<AccessEncounter> getMostRecent(int numOfEncounters);
 
 }

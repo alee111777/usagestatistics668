@@ -5,6 +5,7 @@ package org.openmrs.module.usagestatistics668.advice;
  */
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,7 +27,7 @@ public class EncounterServiceAdvice implements MethodBeforeAdvice {
 
    public void before(Method method, Object[] args, Object target) throws Throwable {
       
-      
+/**      
       AccessEncounterService svc = (AccessEncounterService) Context.getService(AccessEncounterService.class);
       AccessEncounter ae = new AccessEncounter();
       ae.setAccess_type("view");
@@ -36,12 +37,15 @@ public class EncounterServiceAdvice implements MethodBeforeAdvice {
       ae.setTimestamp(new Date());
       ae.setUser_id(1);
       
-      
-      System.out.println("*****saving a access encounter for testing******");
+      System.out.println("*****saving an access encounter for testing******");
       svc.saveAccessEncounter(ae);
       
-      System.out.println("--->fetching a access encounter------>");
-      System.out.println(svc.getAccessEncounter(1).toString());
+      System.out.println("--->fetching all access encounter------>");
+      List<AccessEncounter> results = svc.getMostRecent(10);
+      for (int i = 0; i < results.size(); i++) {
+         System.out.println(results.get(i));     
+      }
+/**/
       /**
       if (method.getName().equals("saveEncounter")) {
          Encounter encounter = (Encounter) args[0];

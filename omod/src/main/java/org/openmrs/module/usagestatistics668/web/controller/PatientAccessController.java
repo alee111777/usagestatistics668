@@ -3,6 +3,7 @@ Auther: Kirill
  */
 package org.openmrs.module.usagestatistics668.web.controller;
 
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "module/usagestatistics668/patientAccess.form")
@@ -25,6 +27,7 @@ public class PatientAccessController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForm(){
             System.out.println("PatientAccessController showForm method***************");
+            
 		return SUCCESS_FORM_VIEW;
 	}
 	
