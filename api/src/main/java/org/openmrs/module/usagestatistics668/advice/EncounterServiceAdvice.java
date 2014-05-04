@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Encounter;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
 import org.openmrs.module.usagestatistics668.AccessEncounterService;
@@ -27,26 +28,7 @@ public class EncounterServiceAdvice implements MethodBeforeAdvice {
 
    public void before(Method method, Object[] args, Object target) throws Throwable {
       
-/**      
-      AccessEncounterService svc = (AccessEncounterService) Context.getService(AccessEncounterService.class);
-      AccessEncounter ae = new AccessEncounter();
-      ae.setAccess_type("view");
-      ae.setEncounter_id(1);
-      ae.setLocation_id(1);
-      ae.setPatient_id(1);
-      ae.setTimestamp(new Date());
-      ae.setUser_id(1);
       
-      System.out.println("*****saving an access encounter for testing******");
-      svc.saveAccessEncounter(ae);
-      
-      System.out.println("--->fetching all access encounter------>");
-      List<AccessEncounter> results = svc.getMostRecent(10);
-      for (int i = 0; i < results.size(); i++) {
-         System.out.println(results.get(i));     
-      }
-/**/
-      /**
       if (method.getName().equals("saveEncounter")) {
          Encounter encounter = (Encounter) args[0];
          usageType = UsageLog.Type.UPDATED;
@@ -54,13 +36,13 @@ public class EncounterServiceAdvice implements MethodBeforeAdvice {
          if (encounter.getEncounterId() == null) {
             usageType = UsageLog.Type.CREATED;
          } else if (encounter.isVoided()) {
-            AccessPatientService svc = (AccessPatientService) Context.getService(AccessPatientService.class);
-				// Patient object is voided, but check database record
-            //if (!svc.isPatientVoidedInDatabase(patient))
+            AccessEncounterService svc = (AccessEncounterService) Context.getService(AccessEncounterService.class);
+	    // Patient object is voided, but check database record
+            //if (!svc.isPatientVoidedInDatabase(encounter))
             //usageType = UsageLog.Type.VOIDED;
          }
       } else if (method.getName().equals("voidEncounter")) {
-         usageType = UsageLog.Type.VOIDED;
+        // usageType = UsageLog.Type.VOIDED;
       }
       /**/
    }
