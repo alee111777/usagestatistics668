@@ -49,25 +49,24 @@
 	<table cellpadding="2" cellspacing="0" width="100%">
 		<tr>
 			<th align="center"><spring:message code="usagestatistics668.results.type"/></th>
-			<th><spring:message code="usagestatistics668.results.date"/></th>
+			<th align="center"><spring:message code="usagestatistics668.results.date"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.user"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.patient"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.record"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.name"/></th>
-			<th align="center"><spring:message code="usagestatistics668.results.void"/></th>
+			<!--<th align="center"><spring:message code="usagestatistics668.results.void"/></th>-->
 		</tr>
-                <c:forEach items="${stats}" var="row" varStatus="rowStatus">
-			<tr class="<c:choose><c:when test="${rowStatus.index % 2 == 0}">evenRow</c:when><c:otherwise>oddRow</c:otherwise></c:choose>">
-				<td><a href="userAccess.htm?from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;userId=${row[0]}">${row[1]}</a></td>
-				<td align="center">${row[2]}</td>
-				<td align="center">${row[3]}</td>
-				<td align="center">${row[4]}</td>
-				<td align="center">${row[5]}</td>
-				<td align="center">${row[6]}</td>
-				<td align="center">${privacy:formatDate(row[7])}</td>
-			</tr>	
-		</c:forEach>
-		<c:if test="${empty stats}">
+                
+                <c:forEach items="${userList}" var="row" varStatus="rowStatus" >
+                   <tr>
+                        <td align="center">${row.access_type}</td>
+                        <td align="center">${row.timestamp}</td>
+                        <td align="center">${row.user_id}</td>
+                        <td align="center">${row.patient_id}</td>
+                   </tr>
+                </c:forEach>
+                
+		<c:if test="${empty userList}">
 			<tr>
 				<td colspan="8" style="padding: 10px; text-align: center"><spring:message code="usagestatistics668.noresults"/></td>
 			</tr>
