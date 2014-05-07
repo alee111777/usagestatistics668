@@ -22,6 +22,6 @@ public interface AccessEncounterService extends OpenmrsService {
     
     public List<AccessEncounter> getMostRecent(int numOfEncounters);
     
-    public List<Object[]> getMostViewedEncounters(Date since, int maxResults) throws APIException;
+    public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException;
 
 }

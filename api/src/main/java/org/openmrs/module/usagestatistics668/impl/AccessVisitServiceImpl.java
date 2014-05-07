@@ -6,6 +6,7 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.usagestatistics668.AccessVisit;
 import org.openmrs.module.usagestatistics668.AccessVisitService;
+import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessVisitDAO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,8 +63,8 @@ public class AccessVisitServiceImpl extends BaseOpenmrsService implements Access
 	}
 
         @Override
-        public List<Object[]> getMostViewedVisit(Date since, int maxResults) throws APIException {
-            return dao.getMostViewedVisit(since, maxResults);
+        public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter,int maxResults) throws APIException {
+            return dao.getMostViewedVisit(since,until,filter, maxResults);
         }
 }
 

@@ -21,5 +21,5 @@ public interface AccessVisitService extends OpenmrsService{
     
     public void saveAccessVisit(AccessVisit accessVisit)throws APIException;   
     
-    public List<Object[]> getMostViewedVisit(Date since, int maxResults) throws APIException; 
+    public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter,int maxResults) throws APIException; 
 }

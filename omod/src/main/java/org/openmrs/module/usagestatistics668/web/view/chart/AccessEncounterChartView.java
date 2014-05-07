@@ -39,7 +39,7 @@ public class AccessEncounterChartView extends AbstractChartView {
 		AccessEncounterService svc = Context.getService(AccessEncounterService.class);
 
                 //Date monthAgo = StatsUtils.addDaysToDate(null, -30);
-		List<Object[]> data = svc.getMostViewedEncounter(getFromDate(), getMaxResults());
+		List<Object[]> data = svc.getMostViewedEncounter(getFromDate(), getUntilDate(),getUsageFilter(),getMaxResults());
                 //List<Object[]> data = svc.getMostViewedPatient(monthAgo, 2);
 		String[] categories = new String[data.size()] ;
                 int[] count = new int[data.size()];

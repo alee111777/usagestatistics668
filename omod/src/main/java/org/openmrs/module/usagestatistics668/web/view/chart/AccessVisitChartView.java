@@ -42,7 +42,7 @@ public class AccessVisitChartView extends AbstractChartView {
 		AccessVisitService svc = Context.getService(AccessVisitService.class);
 
                 //Date monthAgo = StatsUtils.addDaysToDate(null, -30);
-		List<Object[]> data = svc.getMostViewedVisit(getFromDate(), getMaxResults());
+		List<Object[]> data = svc.getMostViewedVisit(getFromDate(), getUntilDate(),getUsageFilter(),getMaxResults());
                 //List<Object[]> data = svc.getMostViewedPatient(monthAgo, 2);
 		String[] categories = new String[data.size()] ;
                 int[] count = new int[data.size()];
