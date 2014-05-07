@@ -36,7 +36,7 @@
 	
 </form>
 <b class="boxHeader">
-	<spring:message code="usagestatistics668.results.visit"/>
+	<spring:message code="usagestatistics668.summary.titile.visit"/>
 </b>
 <div class="box" style="text-align: center">
 	<img src="chart.htm?chart=visit&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal}&amp;width=700&amp;height=200" width="700" height="200" />
