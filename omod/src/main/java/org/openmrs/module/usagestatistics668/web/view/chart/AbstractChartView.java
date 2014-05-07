@@ -89,7 +89,7 @@ public abstract class AbstractChartView extends AbstractView {
 	 * @return the chart object
 	 */
 	protected abstract JFreeChart createChart(Map<String, Object> model, HttpServletRequest request);
-	
+        	
 	/**
 	 * Gets the from date
 	 * @return the from date
