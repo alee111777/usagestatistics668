@@ -21,6 +21,7 @@
 				<privacy_tag:dateRange fromField="from" fromValue="${from}" untilField="until" untilValue="${until}" />
 				
 				<spring:message code="usagestatistics668.query.forEncounter"/>
+                                
                                 <openmrs_tag:encounterField formFieldName="encounterId" searchLabelCode="Patient.find" initialValue="${model.obj.encounterId}" linkUrl="${pageContext.request.contextPath}/admin/encounters/encounter.form" />
                                 <!--<input style="width: 16px" type="button" class="smallButton" id="clearUserBtn" onclick="document.usagesForm.patientId.value='';document.usagesForm.submit();" value="X" />-->
 				
@@ -48,22 +49,21 @@
 	<table cellpadding="2" cellspacing="0" width="100%">
 		<tr>
 			<th align="center"><spring:message code="usagestatistics668.results.type"/></th>
-			<th><spring:message code="usagestatistics668.results.date"/></th>
+			<th align="center"><spring:message code="usagestatistics668.results.date"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.user"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.patient"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.encounter"/></th>
-			<th align="center"><spring:message code="usagestatistics668.results.void"/></th>
+			<!--<th align="center"><spring:message code="usagestatistics668.results.void"/></th>-->
 		</tr>
 
                 <c:forEach items="${encounterList}" var="row" varStatus="rowStatus" >
                    <tr>
-                   <td align="center">${row.access_type}</td>
-                   <td align="center">${row.timestamp}</td>
-                   <td align="center">${userList[rowStatus.index]}</td>
-                   <td align="center">${patientList[rowStatus.index]}</td>
-                   <td>n/a</td>
-                   <td>n/a</td>
-                   <tr>
+                        <td align="center">${row.access_type}</td>
+                        <td align="center">${row.timestamp}</td>
+                        <td align="center">${row.user_id}</td>
+                        <td align="center">${row.patient_id}</td>
+                        <td align="center">${row.encounter_id}</td>
+                   </tr>
                 </c:forEach>
                 
                 <br/>${userList[rowNum]}<br/>

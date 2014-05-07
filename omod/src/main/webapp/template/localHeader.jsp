@@ -1,8 +1,8 @@
 <h2><spring:message code="usagestatistics668.title"/></h2>
 
 <ul id="menu">
-        <li class="first<c:if test='<%= request.getRequestURI().contains("summaryAccess") %>'> active</c:if>">
-		<a href="summaryAccess.htm"><spring:message code="usagestatistics668.menu.summary"/></a>
+        <li class="first<c:if test='<%= request.getRequestURI().contains("patientChart") %>'> active</c:if>">
+		<a href="patientChart.htm"><spring:message code="usagestatistics668.menu.summary"/></a>
 	</li>
 	<li class="test<c:if test='<%= request.getRequestURI().contains("patientAccess") %>'> active</c:if>">
 		<a href="patientAccess.htm"><spring:message code="usagestatistics668.menu.patient"/></a>

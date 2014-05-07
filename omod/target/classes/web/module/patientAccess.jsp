@@ -32,10 +32,37 @@
 			</td>
 		</tr>
 	</table>
+                                
+        <table cellpadding="2" cellspacing="0" width="100%">
+		<tr>
+			<th align="center"><spring:message code="usagestatistics668.results.type"/></th>
+			<th align="center"><spring:message code="usagestatistics668.results.date"/></th>
+			<th align="center"><spring:message code="usagestatistics668.results.user"/></th>
+			<th align="center"><spring:message code="usagestatistics668.results.patient"/></th>
+			<!--<th align="center"><spring:message code="usagestatistics668.results.void"/></th>-->
+		</tr>
+
+                <c:forEach items="${patientList}" var="row" varStatus="rowStatus" >
+                   <tr>
+                        <td align="center">${row.access_type}</td>
+                        <td align="center">${row.timestamp}</td>
+                        <td align="center">${row.user_id}</td>
+                        <td align="center">${row.patient_id}</td>
+                   </tr>
+                </c:forEach>
+                
+		<c:if test="${empty patientList}">
+			<tr>
+				<td colspan="8" style="padding: 10px; text-align: center"><spring:message code="usagestatistics668.noresults"/></td>
+			</tr>
+		</c:if>
+	</table>
 
 </form>
 
+<!--
 <br/>
+
 <b class="boxHeader">
 	<spring:message code="usagestatistics668.results.patient"/>
 </b>
@@ -43,5 +70,6 @@
 	<img src="chart.htm?chart=patient&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal};width=700&amp;height=200" width="700" height="200" />
 </div>
 
-<br/>        
+<br/>       
+-->
 <%@ include file="/WEB-INF/template/footer.jsp"%>
