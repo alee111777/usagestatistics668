@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.969" errors="0" skipped="0" tests="2" name="org.openmrs.module.usagestatistics668.AdminListExtensionTest">
+<testsuite failures="0" time="1.687" errors="0" skipped="0" tests="2" name="org.openmrs.module.usagestatistics668.AdminListExtensionTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_45\jre\bin"/>
@@ -63,6 +63,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase time="1.703" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testValidatesLinks"/>
+  <testcase time="1.484" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testValidatesLinks"/>
   <testcase time="0" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testMediaTypeIsHtml"/>
 </testsuite>
