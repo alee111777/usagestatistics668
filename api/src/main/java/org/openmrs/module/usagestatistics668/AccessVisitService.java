@@ -23,6 +23,8 @@ public interface AccessVisitService extends OpenmrsService{
     
     public void saveAccessVisit(AccessVisit accessVisit)throws APIException;   
     
+    public List<AccessVisit> getMostRecent(int numOfVisits);
+    
     public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter,int maxResults) throws APIException; 
     
     public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException;

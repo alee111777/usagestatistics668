@@ -72,4 +72,10 @@ public class AccessVisitServiceImpl extends BaseOpenmrsService implements Access
         return dao.getDateRangeStats(from, until, location);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<AccessVisit> getMostRecent(int numOfVisits) {
+        
+        return dao.getMostRecent(numOfVisits);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

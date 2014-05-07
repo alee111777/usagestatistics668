@@ -8,6 +8,7 @@ package org.openmrs.module.usagestatistics668.db.hibernate;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -51,6 +52,22 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
 
     public void saveAccessVisit(AccessVisit accessVisit) {
         sessionFactory.getCurrentSession().saveOrUpdate(accessVisit);
+    }
+    
+    public List<AccessVisit> getMostRecent(int numOfVisits) {
+        Criteria query = sessionFactory.getCurrentSession().createCriteria(AccessVisit.class);
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
+        sb.append("FROM access_encounter s ");
+        sb.append("WHERE 1=1 ");
+        sb.append("LIMIT 10");
+
+        List<AccessVisit> results = sessionFactory.getCurrentSession().createSQLQuery(sb.toString())
+                .addEntity("s", AccessVisit.class)
+                .list();
+
+        return results;
+
     }
 
     public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter, int maxResults) {
