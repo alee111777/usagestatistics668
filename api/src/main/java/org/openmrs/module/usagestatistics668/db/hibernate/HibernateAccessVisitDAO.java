@@ -57,6 +57,7 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
         sb.append("  visit_id, ");
         sb.append("  count( * ) AS count ");
         sb.append("FROM " + TABLE_PATIENT);
+        sb.append(" WHERE 1=1 ");
         if (since != null) {
             sb.append("AND timestamp > '" + dfSQL.format(since) + "' ");
         }
