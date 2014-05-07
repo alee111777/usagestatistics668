@@ -51,7 +51,12 @@
    <advice>
         <point>org.openmrs.api.EncounterService</point>
         <class>org.openmrs.module.usagestatistics668.advice.EncounterServiceAdvice</class>
-   </advice>     
+   </advice>    
+   
+    <advice>
+        <point>org.openmrs.api.VisitService</point>
+        <class>org.openmrs.module.usagestatistics668.advice.VisitServiceAdvice</class>
+   </advice> 
  
 
    

@@ -17,7 +17,6 @@ package org.openmrs.module.usagestatistics668;
  * author: Ye
  */
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,7 +26,6 @@ import org.openmrs.User;
 import org.openmrs.Visit;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.usagestatistics668.util.StatsUtils;
-import org.openmrs.util.OpenmrsConstants;
 
 /**
  * Class to handle logging of patient record usage
