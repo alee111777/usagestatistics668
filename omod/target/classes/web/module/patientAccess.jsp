@@ -60,7 +60,9 @@
 
 </form>
 
+<!--
 <br/>
+
 <b class="boxHeader">
 	<spring:message code="usagestatistics668.results.patient"/>
 </b>
@@ -68,5 +70,6 @@
 	<img src="chart.htm?chart=patient&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal};width=700&amp;height=200" width="700" height="200" />
 </div>
 
-<br/>        
+<br/>       
+-->
 <%@ include file="/WEB-INF/template/footer.jsp"%>

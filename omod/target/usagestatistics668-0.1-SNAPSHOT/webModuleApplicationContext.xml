@@ -39,6 +39,8 @@
                                 <prop key="module/usagestatistics668/visitAccess.htm">accessVisitController</prop>
                                 <prop key="module/usagestatistics668/userAccess.htm">accessUserController</prop>
                                 <prop key="module/usagestatistics668/chart.htm">accessChartController</prop>
+                                
+                                <prop key="module/usagestatistics668/patientChart.htm">accessPatientChartController</prop>
 			</props>
 		</property>
 	</bean>    
@@ -80,6 +82,12 @@
 			</map>
 		</property>
 	</bean>  
+        
+        <bean id="accessPatientChartController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
+		<property name="pageViewName">
+			<value>module/usagestatistics668/patientChart</value>
+		</property>
+	</bean> 
 
         <!--
 
