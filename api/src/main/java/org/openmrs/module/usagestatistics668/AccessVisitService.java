@@ -8,8 +8,10 @@ package org.openmrs.module.usagestatistics668;
 
 import java.util.Date;
 import java.util.List;
+import org.openmrs.Location;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
+import org.openmrs.api.db.DAOException;
 
 /**
  *
@@ -22,4 +24,6 @@ public interface AccessVisitService extends OpenmrsService{
     public void saveAccessVisit(AccessVisit accessVisit)throws APIException;   
     
     public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter,int maxResults) throws APIException; 
+    
+    public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException;
 }
