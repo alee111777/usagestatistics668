@@ -41,13 +41,17 @@
                                 <prop key="module/usagestatistics668/chart.htm">accessChartController</prop>
                                 
                                 <prop key="module/usagestatistics668/patientChart.htm">accessPatientChartController</prop>
+                                <prop key="module/usagestatistics668/visitChart.htm">accessVisitChartController</prop>
+                                <prop key="module/usagestatistics668/encounterChart.htm">accessEncounterChartController</prop>
 			</props>
 		</property>
 	</bean>    
         	<!-- ========================= Views ========================= -->
 
 	<bean id="accessPatientView" class="org.openmrs.module.usagestatistics668.web.view.chart.AccessPatientChartView" />
-	
+	<bean id="accessVisitView" class="org.openmrs.module.usagestatistics668.web.view.chart.AccessVisitChartView" />
+        <bean id="accessEncounterView" class="org.openmrs.module.usagestatistics668.web.view.chart.AccessEncounterChartView" />
+
 	<!-- ========================= Controllers ========================= -->
 	
 	<bean id="accessPatientController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
@@ -79,6 +83,8 @@
 		<property name="chartViews">
 			<map>
 				<entry key="patient"><ref bean="accessPatientView" /></entry>
+                                <entry key="visit"><ref bean="accessVisitView" /></entry>
+                                <entry key="encounter"><ref bean="accessEncounterView" /></entry>
 			</map>
 		</property>
 	</bean>  
@@ -88,7 +94,16 @@
 			<value>module/usagestatistics668/patientChart</value>
 		</property>
 	</bean> 
-
+        <bean id="accessVisitChartController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
+		<property name="pageViewName">
+			<value>module/usagestatistics668/visitChart</value>
+		</property>
+	</bean> 
+        <bean id="accessEncounterChartController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
+		<property name="pageViewName">
+			<value>module/usagestatistics668/encounterChart</value>
+		</property>
+	</bean> 
         <!--
 
     <bean id="basicModuleTabUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">

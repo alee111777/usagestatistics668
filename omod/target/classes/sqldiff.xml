@@ -9,7 +9,7 @@
    then this won't be run.  Immediately after running this diff, openmrs sets the patientnotes.database_version GP to 0.1  -->
    <!-- -->
    <diff>
-      <version>0.5.5</version>
+      <version>0.7</version>
       <author>anthony</author>
       <date>Feb 11 2010</date>
       <description>
@@ -24,7 +24,7 @@
             access_type varchar(25) NOT NULL,
             user_id int(20) NOT NULL,
             patient_id int(20) NOT NULL,
-            location_id int(20) NOT NULL,
+            location_id int(20),
             PRIMARY KEY(id)
          ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
           

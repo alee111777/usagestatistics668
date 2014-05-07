@@ -6,6 +6,7 @@
 
 package org.openmrs.module.usagestatistics668.db;
 
+import java.util.Date;
 import java.util.List;
 import org.openmrs.Patient;
 import org.openmrs.api.db.DAOException;
@@ -25,6 +26,8 @@ public interface AccessVisitDAO {
    public AccessVisit getAccessVisit(Integer id);
    
    public void saveAccessVisit(AccessVisit accessVisit)throws DAOException;
+   
+   public List<Object[]> getMostViewedVisit(Date since, int maxResults);
 
 
 }

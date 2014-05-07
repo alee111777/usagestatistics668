@@ -21,5 +21,5 @@ public interface AccessPatientService extends OpenmrsService{
     
     public void saveAccessPatient(AccessPatient accessPatient)throws APIException;   
     
-    public List<Object[]> getMostViewedPatient(Date since, int maxResults) throws APIException;
+    public List<Object[]> getMostViewedPatient(Date since, Date until, ActionCriteria filter,int maxResults) throws APIException;
 }

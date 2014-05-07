@@ -1,5 +1,7 @@
 package org.openmrs.module.usagestatistics668.impl;
 
+import java.util.Date;
+import java.util.List;
 import org.openmrs.api.APIException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.usagestatistics668.AccessVisit;
@@ -59,6 +61,10 @@ public class AccessVisitServiceImpl extends BaseOpenmrsService implements Access
 		dao.saveAccessVisit(accessVisit);
 	}
 
+        @Override
+        public List<Object[]> getMostViewedVisit(Date since, int maxResults) throws APIException {
+            return dao.getMostViewedVisit(since, maxResults);
+        }
 }
 
 

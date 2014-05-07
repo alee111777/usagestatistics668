@@ -26,24 +26,23 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.openmrs.api.context.Context;
 import org.springframework.web.bind.ServletRequestUtils;
-import org.openmrs.module.usagestatistics668.AccessPatientService;
-import org.openmrs.module.usagestatistics668.ActionCriteria;
+import org.openmrs.module.usagestatistics668.AccessVisitService;
 import org.openmrs.module.usagestatistics668.util.ContextProvider;
 import org.openmrs.module.usagestatistics668.util.StatsUtils;
 
 /**
  * View to render hour/day usage data as a chart image
  */
-public class AccessPatientChartView extends AbstractChartView {
+public class AccessVisitChartView extends AbstractChartView {
 
 	@Override
 	protected JFreeChart createChart(Map<String, Object> model, HttpServletRequest request) {
             System.out.println("---------create chart--------------");
 		
-		AccessPatientService svc = Context.getService(AccessPatientService.class);
+		AccessVisitService svc = Context.getService(AccessVisitService.class);
 
                 //Date monthAgo = StatsUtils.addDaysToDate(null, -30);
-		List<Object[]> data = svc.getMostViewedPatient(getFromDate(), getUntilDate(),getUsageFilter(),getMaxResults());
+		List<Object[]> data = svc.getMostViewedVisit(getFromDate(), getMaxResults());
                 //List<Object[]> data = svc.getMostViewedPatient(monthAgo, 2);
 		String[] categories = new String[data.size()] ;
                 int[] count = new int[data.size()];
@@ -51,27 +50,10 @@ public class AccessPatientChartView extends AbstractChartView {
                     categories[i] = String.valueOf(data.get(i)[0]);
                     count[i] = ((BigInteger)data.get(i)[1]).intValue();
                 }
-                
-                String seriesView = ContextProvider.getMessage("usagestatistics668.summary.any");
-                if (getUsageFilter()==ActionCriteria.CREATED){
-                   seriesView = ContextProvider.getMessage("usagestatistics668.summary.created"); 
-                }
-                else if (getUsageFilter()==ActionCriteria.UPDATED){
-                   seriesView = ContextProvider.getMessage("usagestatistics668.summary.updated"); 
-                }
-                else if (getUsageFilter()==ActionCriteria.VIEWED){
-                   seriesView = ContextProvider.getMessage("usagestatistics668.summary.viewed"); 
-                }
-                else if (getUsageFilter()==ActionCriteria.VOIDED){
-                   seriesView = ContextProvider.getMessage("usagestatistics668.summary.voided"); 
-                }
-                else if (getUsageFilter()==ActionCriteria.UNVOIDED){
-                   seriesView = ContextProvider.getMessage("usagestatistics668.summary.unvoided"); 
-                }
-                
+
 		String yAxisLabel = ContextProvider.getMessage("usagestatistics668.summary.count");
-		String xAxisLabel = ContextProvider.getMessage("usagestatistics668.summary.patient");
-                //String seriesView = ContextProvider.getMessage("usagestatistics668.summary.view");
+		String xAxisLabel = ContextProvider.getMessage("usagestatistics668.summary.visit");
+                String seriesView = ContextProvider.getMessage("usagestatistics668.summary.view");
 
                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
                 for (int c = 0; c < data.size(); c++) {

@@ -5,6 +5,11 @@
  */
 package org.openmrs.module.usagestatistics668.db.hibernate;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.openmrs.module.usagestatistics668.AccessVisit;
 import org.openmrs.module.usagestatistics668.db.AccessVisitDAO;
@@ -16,6 +21,9 @@ import org.openmrs.module.usagestatistics668.db.AccessVisitDAO;
 public class HibernateAccessVisitDAO implements AccessVisitDAO {
 
     private SessionFactory sessionFactory;
+    
+    protected static final String TABLE_PATIENT = "access_visit";
+    protected static final SimpleDateFormat dfSQL = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * This is a Hibernate object. It gives us metadata about the currently
@@ -41,6 +49,27 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
 
     public void saveAccessVisit(AccessVisit accessVisit) {
         sessionFactory.getCurrentSession().saveOrUpdate(accessVisit);
+    }
+    
+   public List<Object[]> getMostViewedVisit(Date since, int maxResults) {
+  	StringBuffer sb = new StringBuffer();
+	sb.append("SELECT ");
+	sb.append("  visit_id, ");
+	sb.append("  count( * ) AS count ");
+	sb.append("FROM " + TABLE_PATIENT);
+        if (since != null)
+            sb.append("  WHERE `timestamp` > '" + dfSQL.format(since) + "' ");
+            sb.append(" GROUP BY visit_id ");
+            sb.append("ORDER BY count DESC ");
+            sb.append("LIMIT " + maxResults);
+	
+            return executeSQLQuery(sb.toString());
+   }
+    
+    protected List<Object[]> executeSQLQuery(String sql) {	
+	Session session = sessionFactory.getCurrentSession();
+	SQLQuery query = session.createSQLQuery(sql);
+	return query.list();
     }
 
 }

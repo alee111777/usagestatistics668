@@ -6,6 +6,7 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.usagestatistics668.AccessPatient;
 import org.openmrs.module.usagestatistics668.AccessPatientService;
+import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessPatientDAO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,8 +63,8 @@ public class AccessPatientServiceImpl extends BaseOpenmrsService implements Acce
 	}
 
         @Override
-        public List<Object[]> getMostViewedPatient(Date since, int maxResults) throws APIException {
-            return dao.getMostViewedPatient(since, maxResults);
+        public List<Object[]> getMostViewedPatient(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException {
+            return dao.getMostViewedPatient(since, until, filter,maxResults);
     }
 
 }

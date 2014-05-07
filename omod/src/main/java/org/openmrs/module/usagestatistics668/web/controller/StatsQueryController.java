@@ -55,13 +55,13 @@ public abstract class StatsQueryController extends AbstractController {
 		// Get from and until request parameters
 		from = StatsUtils.getDateParameter(request, "from", weekAgo);
 		until = StatsUtils.getDateParameter(request, "until", lastMidnight);
-                //maxResults = ServletRequestUtils.getIntParameter(request, "maxResults", 2);
-                maxResults = 2;
+                maxResults = ServletRequestUtils.getIntParameter(request, "maxResults", 2);
+                //maxResults = 2;
+                usageFilter = StatsUtils.getActionCriteriaParameter(request, "usageFilter", ActionCriteria.ANY);
 		
 		// Calculate inclusive until date by adding a day
 		untilInclusive = StatsUtils.addDaysToDate(until, 1);
-		
-		usageFilter = StatsUtils.getActionCriteriaParameter(request, "usageFilter", ActionCriteria.ANY);
+
 		
 		// Get paging info
 		int offset = ServletRequestUtils.getIntParameter(request, "offset", 0);

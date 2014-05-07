@@ -13,7 +13,9 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.openmrs.module.usagestatistics668.AccessPatient;
+import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessPatientDAO;
+
 
 /**
  *
@@ -46,23 +48,35 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
    }
 
    public void saveAccessPatient(AccessPatient accessPatient) {
-       //sessionFactory.getCurrentSession().saveOrUpdate(accessPatient);
-		
-      //return accessPatient;
+       sessionFactory.getCurrentSession().saveOrUpdate(accessPatient);
    }
 
-   public List<Object[]> getMostViewedPatient(Date since, int maxResults) {
+   public List<Object[]> getMostViewedPatient(Date since, Date until, ActionCriteria filter,int maxResults) {
   		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT ");
 		sb.append("  patient_id, ");
 		sb.append("  count( * ) AS count ");
 		sb.append("FROM " + TABLE_PATIENT);
-                if (since != null)
-                    sb.append("  WHERE `timestamp` > '" + dfSQL.format(since) + "' ");
+                sb.append(" WHERE 1=1 ");
+		if (since != null)
+			sb.append("AND timestamp > '" + dfSQL.format(since) + "' ");
+		if (until != null)
+			sb.append("AND timestamp < '" + dfSQL.format(until) + "' ");
+                System.out.println(filter);
+                if (filter == ActionCriteria.CREATED)
+			sb.append("  AND access_type = 'created' ");
+		else if (filter == ActionCriteria.VOIDED)
+			sb.append("  AND access_type = 'viewed' ");
+		else if (filter == ActionCriteria.UPDATED)
+			sb.append("  AND access_type = 'updated' ");
+		else if (filter == ActionCriteria.VOIDED)
+			sb.append("  AND access_type = 'voided' ");
+                else if (filter == ActionCriteria.UNVOIDED)
+			sb.append("  AND access_type = 'unvoided' ");
 		sb.append(" GROUP BY patient_id ");
                 sb.append("ORDER BY count DESC ");
                 sb.append("LIMIT " + maxResults);
-	
+                System.out.println(sb.toString());
 		return executeSQLQuery(sb.toString());
    }
     

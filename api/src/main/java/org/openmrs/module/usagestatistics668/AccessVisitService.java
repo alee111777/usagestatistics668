@@ -6,6 +6,8 @@
 
 package org.openmrs.module.usagestatistics668;
 
+import java.util.Date;
+import java.util.List;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 
@@ -17,5 +19,7 @@ public interface AccessVisitService extends OpenmrsService{
     
     public AccessVisit getAccessVisit(Integer id);
     
-    public void saveAccessVisit(AccessVisit accessVisit)throws APIException;    
+    public void saveAccessVisit(AccessVisit accessVisit)throws APIException;   
+    
+    public List<Object[]> getMostViewedVisit(Date since, int maxResults) throws APIException; 
 }

@@ -17,6 +17,7 @@ package org.openmrs.module.usagestatistics668;
  * author: Ye
  */
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,6 +27,7 @@ import org.openmrs.User;
 import org.openmrs.Visit;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.usagestatistics668.util.StatsUtils;
+import org.openmrs.util.OpenmrsConstants;
 
 /**
  * Class to handle logging of patient record usage
@@ -114,7 +116,10 @@ public class UsageLog {
                 ae.setUser_id(user.getUserId());
                 ae.setEncounter_id(encounter.getEncounterId());
                 ae.setPatient_id(encounter.getPatient().getPatientId());
-                ae.setLocation_id(encounter.getLocation().getLocationId());
+                if (encounter.getLocation()!= null){
+                    ae.setLocation_id(encounter.getLocation().getLocationId());
+                }
+                else ae.setLocation_id(null);
 	        svc.saveAccessEncounter(ae);
                 System.out.println("---------------access encounter data saved------------");
                 
@@ -168,3 +173,4 @@ public class UsageLog {
                 //end of testing
 	}
 }
+

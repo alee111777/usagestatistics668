@@ -18,10 +18,13 @@ package org.openmrs.module.usagestatistics668;
  * Enumeration of the how usages can be filtered by action in a query
  */
 public enum ActionCriteria {
-	ANY_OR_NONE,
 	ANY,
 	VIEWED,
-	EDITED;
+        UPDATED,
+        VOIDED,
+        UNVOIDED,
+	CREATED;
+
 	
 	/**
 	 * Bean-property wrapper for the ordinal method so it can be used in EL
