@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <testsuite failures="0" time="0.312" errors="0" skipped="0" tests="2" name="org.openmrs.module.usagestatistics668.AdminListExtensionTest">
+=======
+<testsuite failures="0" time="1.969" errors="0" skipped="0" tests="2" name="org.openmrs.module.usagestatistics668.AdminListExtensionTest">
+>>>>>>> 80e075b400345d03ebbd8b14665f156be2749b49
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/jre/lib"/>
@@ -42,9 +46,15 @@
     <property name="user.name" value="Jonathan"/>
     <property name="java.class.path" value="/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/maven/boot/plexus-classworlds-2.4.jar"/>
     <property name="java.vm.specification.version" value="1.7"/>
+<<<<<<< HEAD
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/jre"/>
     <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/Applications/NetBeans/NetBeans 7.4.app/Contents/Resources/NetBeans/java/maven-nblib/netbeans-eventspy.jar clean install"/>
+=======
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.7.0_45\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=D:\Program Files\NetBeans 7.4\java\maven-nblib\netbeans-eventspy.jar install"/>
+>>>>>>> 80e075b400345d03ebbd8b14665f156be2749b49
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -62,6 +72,10 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
+<<<<<<< HEAD
   <testcase time="0.255" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testValidatesLinks"/>
+=======
+  <testcase time="1.703" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testValidatesLinks"/>
+>>>>>>> 80e075b400345d03ebbd8b14665f156be2749b49
   <testcase time="0" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testMediaTypeIsHtml"/>
 </testsuite>
