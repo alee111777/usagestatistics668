@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.Encounter;
 import org.openmrs.Patient;
 import org.openmrs.User;
+import org.openmrs.Visit;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.usagestatistics668.util.StatsUtils;
 import org.openmrs.util.OpenmrsConstants;
@@ -89,65 +90,83 @@ public class UsageLog {
 	 * Logs a usage event
 	 * @param encounter the encounter
 	 */
-	public static void logEvent(Encounter encounter, Type type) {
-		// Use encounter creator as infopath forms are submitted by super user
-		User user = encounter.getCreator();
-		Patient patient = encounter.getPatient();
+	public static void logEvent(Encounter encounter, Type type, String query) {
+		User user = Context.getAuthenticatedUser();
 		
-		//logEvent(user, patient, encounter, type, null);
+		//logEvent(user, patient, null, type, query);
+                AccessEncounterService svc = (AccessEncounterService)Context.getService(AccessEncounterService.class);
+		AccessEncounter ae = new AccessEncounter();
+		
+		// Set created / updated / voided flags
+		if (type == Type.CREATED){
+			ae.setAccess_type("created");
+                }
+		else if (type == Type.UPDATED) {
+			ae.setAccess_type("updated");
+                }
+                else if (type == Type.VOIDED){
+			ae.setAccess_type("voided");
+                }
+                else if (type == Type.VIEWED){
+			ae.setAccess_type("viewed");
+                }
+
+		// Update the time of the recent event
+		ae.setTimestamp(new Date());
+                ae.setUser_id(user.getUserId());
+                ae.setEncounter_id(encounter.getEncounterId());
+                ae.setPatient_id(encounter.getPatient().getPatientId());
+                ae.setLocation_id(encounter.getLocation().getLocationId());
+	        svc.saveAccessEncounter(ae);
+                System.out.println("---------------access encounter data saved------------");
+                
+                //testing
+                Date monthAgo = StatsUtils.addDaysToDate(null, -30);
+                //int patient_id = (Integer)svc.getMostViewedEncounter(monthAgo, 2).get(0)[0];
+                //System.out.println(patient_id);
+                //end of testing
 	}
 	
 	/**
 	 * Logs a usage event
-	 * @param user the user
-	 * @param patient the patient
-	 * @param encounter the encounter
-	 * @param type the type of usage event
-	 * @param query the search query used to find this patient
+    * @param visit
+    * @param type
+    * @param query
 	 */
-	/*private static void logEvent(User user, Patient patient, Encounter encounter, Type type, String query) {
-		if (patient == null) {
-			log.warn("Attempt to log usage on null patient");
-			return;
-		}
+	public static void logEvent(Visit visit, Type type, String query) {
+		User user = Context.getAuthenticatedUser();
 		
-		//Options config = Options.getInstance();
-		
-		// Optionally ignore system developers
-		//if (user != null && user.hasRole(OpenmrsConstants.SUPERUSER_ROLE) && config.isIgnoreSystemDevelopers())
-		//	return;
-		
-		AccessPatientService svc = (AccessPatientService)Context.getService(AccessPatientService.class);
-		AccessPatient ap = new AccessPatient();
-
-		// Update the time of the recent event
-		ap.setDate(new Date());
-
-		if (encounter != null) {
-			ap.setEncounter_id(encounter.getEncounterId());
-                        ap.setLocation_id(encounter.getLocation().getLocationId());
-		}
-                else {
-                    ap.setEncounter_id(-999);
-                    ap.setLocation_id(-999);
-                }
+		//logEvent(user, patient, null, type, query);
+                AccessVisitService svc = (AccessVisitService)Context.getService(AccessVisitService.class);
+		AccessVisit ap = new AccessVisit();
 		
 		// Set created / updated / voided flags
 		if (type == Type.CREATED){
-			ap.setViewed_edited('c');
+			ap.setAccess_type("created");
                 }
 		else if (type == Type.UPDATED) {
-			ap.setViewed_edited('u');
+			ap.setAccess_type("updated");
                 }
                 else if (type == Type.VOIDED){
-			ap.setViewed_edited('d');
+			ap.setAccess_type("voided");
                 }
-		
-               
-              //ap.setEncounter_id(0);
-              //ap.setLocation_id(0);
-              ap.setUser_id(user.getUserId());
-              ap.setPatient_id(patient.getPersonId());
-	      svc.saveAccessPatient(ap);
-	}*/
+                else if (type == Type.VIEWED){
+			ap.setAccess_type("viewed");
+                }
+
+		// Update the time of the recent event
+		ap.setTimestamp(new Date());
+                ap.setUser_id(user.getUserId());
+                ap.setVisit_id(visit.getVisitId());
+                ap.setLocation_id(visit.getLocation().getLocationId());
+                ap.setPatient_id(visit.getPatient().getPatientId());
+	        svc.saveAccessVisit(ap);
+                System.out.println("---------------access visit data saved------------");
+                
+                //testing
+                Date monthAgo = StatsUtils.addDaysToDate(null, -30);
+                //int patient_id = (Integer)svc.getMostViewedVisit(monthAgo, 2).get(0)[0];
+                //System.out.println(patient_id);
+                //end of testing
+	}
 }
