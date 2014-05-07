@@ -1,17 +1,14 @@
 package org.openmrs.module.usagestatistics668.advice;
 
 /**
- * author: Ye
+ * author: Anthony Lee
  */
 import java.lang.reflect.Method;
-import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Encounter;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.usagestatistics668.AccessEncounter;
 import org.openmrs.module.usagestatistics668.AccessEncounterService;
 import org.openmrs.module.usagestatistics668.UsageLog;
 import org.springframework.aop.AfterReturningAdvice;
@@ -20,51 +17,51 @@ import org.springframework.aop.MethodBeforeAdvice;
 /**
  * AOP class used to intercept and log calls to EncounterService methods
  */
-public class EncounterServiceAdvice implements MethodBeforeAdvice {
+public class EncounterServiceAdvice implements MethodBeforeAdvice, AfterReturningAdvice  {
 
-   protected static final Log log = LogFactory.getLog(EncounterServiceAdvice.class);
+   private Log log = LogFactory.getLog(this.getClass());
+
+   private int count = 0;
 
    protected UsageLog.Type usageType;
 
    public void before(Method method, Object[] args, Object target) throws Throwable {
-      
-      
-      if (method.getName().equals("saveEncounter")) {
+      System.out.println("before aop, method name: " + method.getName());
+
+      if (method.getName().equals("saveEncounter") || method.getName().equals("updateEncounter")) {
          Encounter encounter = (Encounter) args[0];
          usageType = UsageLog.Type.UPDATED;
-
          if (encounter.getEncounterId() == null) {
             usageType = UsageLog.Type.CREATED;
          } else if (encounter.isVoided()) {
             AccessEncounterService svc = (AccessEncounterService) Context.getService(AccessEncounterService.class);
-	    // Patient object is voided, but check database record
-            //if (!svc.isPatientVoidedInDatabase(encounter))
+				// Encounter object is voided, but check database record
+            //if (!svc.isEncounterVoidedInDatabase(encounter))
             //usageType = UsageLog.Type.VOIDED;
          }
+      } else if (method.getName().equals("createEncounter") || method.getName().equals("unvoidEncounter")) {
+         usageType = UsageLog.Type.CREATED;
       } else if (method.getName().equals("voidEncounter")) {
-        // usageType = UsageLog.Type.VOIDED;
+         usageType = UsageLog.Type.VOIDED;
       }
-      /**/
    }
 
-   /**
-    * @param returnVal
-    * @param method
-    * @param args
-    * @param target
-    * @throws java.lang.Throwable
-    * @see org.springframework.aop.AfterReturningAdvice#afterReturning(Object,
-    * Method, Object[], Object)
-    */
-   public void afterReturning(Object returnVal, Method method, Object[] args, Object target) throws Throwable {
-      
-      /**
-      if (method.getName().equals("saveEncounter")) {
-
+   public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
+      System.out.println("after aop, method name: " + method.getName());
+      if (method.getName().equals("getEncounter")) {
+         Encounter patient = (Encounter) returnValue;
+         usageType = UsageLog.Type.VIEWED;
+         UsageLog.logEvent(patient, usageType, null);
+      }
+      //log.debug("Method: " + method.getName() + ". After advice called " + (++count) + " time(s) now.");
+      if (method.getName().equals("saveEncounter")
+              || method.getName().equals("updateEncounter")
+              || method.getName().equals("createEncounter")
+              || method.getName().equals("voidEncounter")
+              || method.getName().equals("unvoidEncounter")) {
          Encounter encounter = (Encounter) args[0];
-
-         UsageLog.logEvent(encounter, usageType);
+         UsageLog.logEvent(encounter, usageType, null);
       }
-      /**/
    }
+
 }

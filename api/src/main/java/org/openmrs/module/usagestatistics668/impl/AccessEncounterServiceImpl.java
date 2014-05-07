@@ -1,16 +1,14 @@
 package org.openmrs.module.usagestatistics668.impl;
 
+import java.util.Date;
 import java.util.List;
 
-import org.openmrs.Patient;
 import org.openmrs.api.APIException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
 import org.openmrs.module.usagestatistics668.AccessEncounterService;
-import org.openmrs.module.usagestatistics668.Note;
 import org.openmrs.module.usagestatistics668.NoteService;
 import org.openmrs.module.usagestatistics668.db.AccessEncounterDAO;
-import org.openmrs.module.usagestatistics668.db.NoteDAO;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -67,6 +65,10 @@ public class AccessEncounterServiceImpl extends BaseOpenmrsService implements Ac
 
    public List<AccessEncounter> getMostRecent(int numOfEncounters) {
       return dao.getMostRecent(numOfEncounters);
+   }
+
+   public List<Object[]> getMostViewedEncounters(Date since, int maxResults) throws APIException {
+      return dao.getMostViewedEncounter(since, maxResults);
    }
 
 }

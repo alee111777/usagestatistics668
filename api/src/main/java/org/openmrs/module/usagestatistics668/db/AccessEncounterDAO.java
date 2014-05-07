@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.openmrs.module.usagestatistics668.db;
 
+import java.util.Date;
 import java.util.List;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
 
@@ -20,9 +20,11 @@ import org.openmrs.module.usagestatistics668.AccessEncounter;
 public interface AccessEncounterDAO {
 
    public AccessEncounter getAccessEncounter(Integer id);
-   
+
    public void saveAccessEncounter(AccessEncounter accessEncounter);
-  
+
    public List<AccessEncounter> getMostRecent(int numOfEncounters);
+
+   public List<Object[]> getMostViewedEncounter(Date since, int maxResults);
 
 }
