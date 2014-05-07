@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: org.openmrs.module.usagestatistics668.AdminListExtensionTest
--------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.9 sec
-=======
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.453 sec
->>>>>>> 38fa3c3e7d32eca270c67fb31e1f35eb546155e3
