@@ -20,23 +20,29 @@
 
 				<privacy_tag:dateRange fromField="from" fromValue="${from}" untilField="until" untilValue="${until}" />
 				
-				<spring:message code="usagestatistics668.query.forPatient"/>
+				<spring:message code="usagestatistics668.query.forEncounter"/>
 
 				<privacy_tag:usageFilter formFieldName="usageFilter" initialValue="${usageFilter}" />
 				
 				<spring:message code="usagestatistics668.query.type"/>
+                                
+                                <input type="submit" value=<spring:message code="usagestatistics668.query.update" />
 
 			</td>
-			<td align="right">
-				<input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
-			</td>
+                        
+                        <td align="right">
+                            <spring:message code="usagestatistics668.quantity.title"/>
+                            <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
+                            <!--Add functionality to this submit button-->
+                            <input type="button" value=<spring:message code="usagestatistics668.query.update" /> 
+                        </td>
 		</tr>
 	</table>		
 	
 	
 </form>
 <b class="boxHeader">
-	<spring:message code="usagestatistics668.summary.titile.encounter"/>
+	<spring:message code="usagestatistics668.summary.title.encounter"/>
 </b>
 <div class="box" style="text-align: center">
 	<img src="chart.htm?chart=encounter&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal}&amp;width=700&amp;height=200" width="700" height="200" />

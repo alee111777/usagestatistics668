@@ -21,15 +21,23 @@
 				<privacy_tag:dateRange fromField="from" fromValue="${from}" untilField="until" untilValue="${until}" />
 				
 				<spring:message code="usagestatistics668.query.forPatient"/>
+                                
+                                <openmrs_tag:patientField formFieldName="patientId" searchLabelCode="Patient.find" initialValue="${model.patient.patientId}" linkUrl="${pageContext.request.contextPath}/admin/patients/patient.form"/>	
 
 				<privacy_tag:usageFilter formFieldName="usageFilter" initialValue="${usageFilter}" />
 				
 				<spring:message code="usagestatistics668.query.type"/>
+                                
+                                <input type="submit" value="Submit" />
 
 			</td>
-			<td align="right">
-				<input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
-			</td>
+                        
+                        <td align="right">
+                            <spring:message code="usagestatistics668.quantity.title"/>
+                            <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
+                            <!--Add functionality to this submit button-->
+                            <input type="button" value="Submit" /> 
+                        </td>
 		</tr>
 	</table>
                                 
