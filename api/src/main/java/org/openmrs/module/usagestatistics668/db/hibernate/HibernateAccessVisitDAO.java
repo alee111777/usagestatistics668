@@ -53,7 +53,7 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
     public void saveAccessVisit(AccessVisit accessVisit) {
         sessionFactory.getCurrentSession().saveOrUpdate(accessVisit);
     }
-    
+
     public List<AccessVisit> getMostRecent(int numOfVisits) {
         Criteria query = sessionFactory.getCurrentSession().createCriteria(AccessVisit.class);
         StringBuffer sb = new StringBuffer();
@@ -101,29 +101,32 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
         System.out.println(sb.toString());
         return executeSQLQuery(sb.toString());
     }
-    
+
     public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException {
-		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT ");
-		sb.append("  `date`, ");
-		sb.append("  SUM(usages) as usages, ");
-		sb.append("  SUM(encounters) as encounters, ");
-		sb.append("  SUM(updates) as updates ");
-		sb.append("FROM " + TABLE_VISIT + " ");
-		sb.append("WHERE 1=1 ");
-		
-		if (from != null)
-			sb.append("  AND date > '" + dfSQL.format(from) + "' ");
-		if (until != null)
-			sb.append("  AND date < '" + dfSQL.format(until) + "' ");
-		if (location != null)
-			sb.append("  AND location_id = " + location.getLocationId() + " ");
-		
-		sb.append("GROUP BY `date` ");
-		sb.append("ORDER BY `date` ASC;");
-		
-		return executeSQLQuery(sb.toString());
-	}
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT ");
+        sb.append("  `date`, ");
+        sb.append("  SUM(usages) as usages, ");
+        sb.append("  SUM(encounters) as encounters, ");
+        sb.append("  SUM(updates) as updates ");
+        sb.append("FROM " + TABLE_VISIT + " ");
+        sb.append("WHERE 1=1 ");
+
+        if (from != null) {
+            sb.append("  AND date > '" + dfSQL.format(from) + "' ");
+        }
+        if (until != null) {
+            sb.append("  AND date < '" + dfSQL.format(until) + "' ");
+        }
+        if (location != null) {
+            sb.append("  AND location_id = " + location.getLocationId() + " ");
+        }
+
+        sb.append("GROUP BY `date` ");
+        sb.append("ORDER BY `date` ASC;");
+
+        return executeSQLQuery(sb.toString());
+    }
 
     protected List<Object[]> executeSQLQuery(String sql) {
         Session session = sessionFactory.getCurrentSession();

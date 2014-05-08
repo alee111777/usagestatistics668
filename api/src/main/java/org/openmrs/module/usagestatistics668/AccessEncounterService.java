@@ -19,13 +19,13 @@ import org.openmrs.api.db.DAOException;
 public interface AccessEncounterService extends OpenmrsService {
 
     public AccessEncounter getAccessEncounter(Integer id);
-    
+
     public void saveAccessEncounter(AccessEncounter accessEncounter) throws APIException;
-    
+
     public List<AccessEncounter> getMostRecent(int numOfEncounters);
-    
+
     public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException;
-    
+
     public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException;
 
 }

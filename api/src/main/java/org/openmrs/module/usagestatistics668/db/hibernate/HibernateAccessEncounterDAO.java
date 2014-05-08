@@ -100,33 +100,36 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
         System.out.println(sb.toString());
         return executeSQLQuery(sb.toString());
     }
-    
+
     public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException {
-		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT ");
-		sb.append("  `date`, ");
-		sb.append("  SUM(usages) as usages, ");
-		sb.append("  SUM(encounters) as encounters, ");
-		sb.append("  SUM(updates) as updates ");
-		sb.append("FROM " + TABLE_ENCOUNTER + " ");
-		sb.append("WHERE 1=1 ");
-		
-		if (from != null)
-			sb.append("  AND date > '" + dfSQL.format(from) + "' ");
-		if (until != null)
-			sb.append("  AND date < '" + dfSQL.format(until) + "' ");
-		if (location != null)
-			sb.append("  AND location_id = " + location.getLocationId() + " ");
-		
-		sb.append("GROUP BY `date` ");
-		sb.append("ORDER BY `date` ASC;");
-		
-		return executeSQLQuery(sb.toString());
-	}
-    
-    protected List<Object[]> executeSQLQuery(String sql) {	
-	Session session = sessionFactory.getCurrentSession();
-	SQLQuery query = session.createSQLQuery(sql);
-	return query.list();
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT ");
+        sb.append("  `date`, ");
+        sb.append("  SUM(usages) as usages, ");
+        sb.append("  SUM(encounters) as encounters, ");
+        sb.append("  SUM(updates) as updates ");
+        sb.append("FROM " + TABLE_ENCOUNTER + " ");
+        sb.append("WHERE 1=1 ");
+
+        if (from != null) {
+            sb.append("  AND date > '" + dfSQL.format(from) + "' ");
+        }
+        if (until != null) {
+            sb.append("  AND date < '" + dfSQL.format(until) + "' ");
+        }
+        if (location != null) {
+            sb.append("  AND location_id = " + location.getLocationId() + " ");
+        }
+
+        sb.append("GROUP BY `date` ");
+        sb.append("ORDER BY `date` ASC;");
+
+        return executeSQLQuery(sb.toString());
+    }
+
+    protected List<Object[]> executeSQLQuery(String sql) {
+        Session session = sessionFactory.getCurrentSession();
+        SQLQuery query = session.createSQLQuery(sql);
+        return query.list();
     }
 }

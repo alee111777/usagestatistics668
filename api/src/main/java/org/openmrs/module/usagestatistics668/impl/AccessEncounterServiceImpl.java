@@ -34,51 +34,49 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class AccessEncounterServiceImpl extends BaseOpenmrsService implements AccessEncounterService {
 
-   /**
-    * This "dao" object is set by spring. See the
-    * /metadata/moduleApplicationContext.xml for what value gets set here. We
-    * can assume that this will never be null, even though it never gets set in
-    * here. This is called Inversion of Control (IoC)
-    */
-   private AccessEncounterDAO dao;
+    /**
+     * This "dao" object is set by spring. See the
+     * /metadata/moduleApplicationContext.xml for what value gets set here. We
+     * can assume that this will never be null, even though it never gets set in
+     * here. This is called Inversion of Control (IoC)
+     */
+    private AccessEncounterDAO dao;
 
-   /**
-    * This is the method that spring calls to set the DAO
-    *
-    * @param dao the dao to set
-    */
-   public void setDao(AccessEncounterDAO dao) {
-      this.dao = dao;
-   }
+    /**
+     * This is the method that spring calls to set the DAO
+     *
+     * @param dao the dao to set
+     */
+    public void setDao(AccessEncounterDAO dao) {
+        this.dao = dao;
+    }
 
-   /**
-    * @param id
-    * @return
-    * @see
-    * org.openmrs.module.patientnotes.NoteService#getNote(java.lang.Integer)
-    */
-   @Transactional(readOnly = true)
-   public AccessEncounter getAccessEncounter(Integer id) {
-      return dao.getAccessEncounter(id);
-   }
+    /**
+     * @param id
+     * @return
+     * @see
+     * org.openmrs.module.patientnotes.NoteService#getNote(java.lang.Integer)
+     */
+    @Transactional(readOnly = true)
+    public AccessEncounter getAccessEncounter(Integer id) {
+        return dao.getAccessEncounter(id);
+    }
 
-   public void saveAccessEncounter(AccessEncounter accessEncounter) throws APIException {
-      dao.saveAccessEncounter(accessEncounter);
-   }
+    public void saveAccessEncounter(AccessEncounter accessEncounter) throws APIException {
+        dao.saveAccessEncounter(accessEncounter);
+    }
 
-   public List<AccessEncounter> getMostRecent(int numOfEncounters) {
-      return dao.getMostRecent(numOfEncounters);
-   }
+    public List<AccessEncounter> getMostRecent(int numOfEncounters) {
+        return dao.getMostRecent(numOfEncounters);
+    }
 
-   public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException {
-      return dao.getMostViewedEncounter(since, until, filter, maxResults);
-   }
+    public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException {
+        return dao.getMostViewedEncounter(since, until, filter, maxResults);
+    }
 
     public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException {
         return dao.getDateRangeStats(from, until, location);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
-   
 
 }

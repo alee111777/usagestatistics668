@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<<<<<<< HEAD
-<testsuite failures="0" time="0.328" errors="0" skipped="0" tests="2" name="org.openmrs.module.usagestatistics668.AdminListExtensionTest">
-=======
-<testsuite failures="0" time="1.687" errors="0" skipped="0" tests="2" name="org.openmrs.module.usagestatistics668.AdminListExtensionTest">
->>>>>>> 9503165be7c51bc09f2505823e72903e4cf13c4c
+<testsuite failures="0" time="0.315" errors="0" skipped="0" tests="2" name="org.openmrs.module.usagestatistics668.AdminListExtensionTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/jre/lib"/>
@@ -66,10 +62,6 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-<<<<<<< HEAD
-  <testcase time="0.262" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testValidatesLinks"/>
-=======
-  <testcase time="1.484" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testValidatesLinks"/>
->>>>>>> 9503165be7c51bc09f2505823e72903e4cf13c4c
+  <testcase time="0.26" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testValidatesLinks"/>
   <testcase time="0" classname="org.openmrs.module.usagestatistics668.AdminListExtensionTest" name="testMediaTypeIsHtml"/>
 </testsuite>

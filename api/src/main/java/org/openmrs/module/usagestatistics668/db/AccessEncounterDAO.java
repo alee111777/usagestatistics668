@@ -22,14 +22,14 @@ import org.openmrs.module.usagestatistics668.ActionCriteria;
  */
 public interface AccessEncounterDAO {
 
-   public AccessEncounter getAccessEncounter(Integer id);
+    public AccessEncounter getAccessEncounter(Integer id);
 
-   public void saveAccessEncounter(AccessEncounter accessEncounter);
+    public void saveAccessEncounter(AccessEncounter accessEncounter);
 
-   public List<AccessEncounter> getMostRecent(int numOfEncounters);
+    public List<AccessEncounter> getMostRecent(int numOfEncounters);
 
-   public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults);
-   
-   public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException;
+    public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults);
+
+    public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException;
 
 }
