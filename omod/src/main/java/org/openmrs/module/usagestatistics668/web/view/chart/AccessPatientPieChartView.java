@@ -65,7 +65,7 @@ public class AccessPatientPieChartView extends AbstractChartView {
             seriesView = ContextProvider.getMessage("usagestatistics668.summary.unvoided");
         }
 
-        String title = ContextProvider.getMessage("usagestatistics668.summary.titile.patient");
+        String title = ContextProvider.getMessage("usagestatistics668.summary.title.patient");
         //String seriesView = ContextProvider.getMessage("usagestatistics668.summary.view");
 
         DefaultPieDataset dataset = new DefaultPieDataset();
