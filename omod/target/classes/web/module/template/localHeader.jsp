@@ -13,7 +13,7 @@
 	<li class="test<c:if test='<%= request.getRequestURI().contains("accessEncounter") %>'> active</c:if>">
 		<a href="accessEncounter.htm"><spring:message code="usagestatistics668.menu.encounter"/></a>
 	</li>
-	<li class="test<c:if test='<%= request.getRequestURI().contains("visitAccess") %>'> active</c:if>">
-		<a href="visitAccess.htm"><spring:message code="usagestatistics668.menu.visit"/></a>
+	<li class="test<c:if test='<%= request.getRequestURI().contains("accessVisit") %>'> active</c:if>">
+		<a href="accessVisit.htm"><spring:message code="usagestatistics668.menu.visit"/></a>
 	</li>
 </ul>

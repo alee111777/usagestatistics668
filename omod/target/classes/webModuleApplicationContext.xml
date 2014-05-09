@@ -35,12 +35,12 @@
 			<props>
 				<prop key="module/usagestatistics668/patientAccess.htm">accessPatientController</prop>
                                 <prop key="module/usagestatistics668/accessEncounter.htm">accessEncounterController</prop>
-                                <prop key="module/usagestatistics668/orderAccess.htm">accessOrderController</prop>
-                                <prop key="module/usagestatistics668/visitAccess.htm">accessVisitController</prop>
+                                <!--<prop key="module/usagestatistics668/orderAccess.htm">accessOrderController</prop>-->
+                                <prop key="module/usagestatistics668/accessVisit.htm">accessVisitController</prop>
                                 <prop key="module/usagestatistics668/userAccess.htm">accessUserController</prop>
+                                
                                 <prop key="module/usagestatistics668/chart.htm">accessChartController</prop>
                                 <prop key="module/usagestatistics668/piechart.htm">accessPieChartController</prop>
-                                
                                 <prop key="module/usagestatistics668/patientChart.htm">accessPatientChartController</prop>
                                 <prop key="module/usagestatistics668/visitChart.htm">accessVisitChartController</prop>
                                 <prop key="module/usagestatistics668/encounterChart.htm">accessEncounterChartController</prop>
@@ -62,11 +62,11 @@
 		</property>
 	</bean>  
            
-        <bean id="accessOrderController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
+<!--        <bean id="accessOrderController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/orderAccess</value>
 		</property>
-	</bean> 
+	</bean> -->
    
         <bean id="accessEncounterController" class="org.openmrs.module.usagestatistics668.web.controller.AccessEncounterController">
            <property name="pageViewName">
@@ -74,9 +74,9 @@
            </property>
         </bean>
    
-        <bean id="accessVisitController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
+        <bean id="accessVisitController" class="org.openmrs.module.usagestatistics668.web.controller.AccessVisitController">
 		<property name="pageViewName">
-			<value>module/usagestatistics668/visitAccess</value>
+			<value>module/usagestatistics668/accessVisit</value>
 		</property>
 	</bean> 
         
