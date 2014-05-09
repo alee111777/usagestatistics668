@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import org.openmrs.Location;
 import org.openmrs.Patient;
+import org.openmrs.User;
 import org.openmrs.api.db.DAOException;
 //import org.openmrs.module.usagestatistics668.AccessOrder;
 import org.openmrs.module.usagestatistics668.AccessVisit;
@@ -32,6 +33,6 @@ public interface AccessVisitDAO {
 
     public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter, int maxResults);
 
-    public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException;
+    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults);
 
 }

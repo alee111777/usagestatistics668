@@ -3,6 +3,8 @@ package org.openmrs.module.usagestatistics668.impl;
 import java.util.Date;
 import java.util.List;
 import org.openmrs.Location;
+import org.openmrs.Patient;
+import org.openmrs.User;
 import org.openmrs.api.APIException;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.api.impl.BaseOpenmrsService;
@@ -68,8 +70,8 @@ public class AccessVisitServiceImpl extends BaseOpenmrsService implements Access
         return dao.getMostViewedVisit(since, until, filter, maxResults);
     }
 
-    public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException {
-        return dao.getDateRangeStats(from, until, location);
+    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults) {
+        return dao.getDateRangeList(since, until, filter, maxResults);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

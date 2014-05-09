@@ -13,12 +13,18 @@ package org.openmrs.module.usagestatistics668.advice;
 
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.usagestatistics668.AccessEncounter;
+import org.openmrs.module.usagestatistics668.AccessEncounterService;
+import org.openmrs.module.usagestatistics668.AccessPatient;
+import org.openmrs.module.usagestatistics668.AccessPatientService;
 import org.openmrs.module.usagestatistics668.AccessVisit;
 import org.openmrs.module.usagestatistics668.AccessVisitService;
+import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.springframework.aop.MethodBeforeAdvice;
 
 
@@ -34,17 +40,19 @@ public class CountingBeforeAdvice implements MethodBeforeAdvice {
 
     public void before(Method method, Object[] os, Object o) throws Throwable {
         
-        AccessVisitService svc = (AccessVisitService)Context.getService(AccessVisitService.class);
-	AccessVisit av = new AccessVisit();
-//        av.setAccess_type("viewed");
-//        av.setLocation_id(1);
-//        av.setPatient_id(1);
-//        av.setTimestamp(new Date());
-//        av.setUser_id(1);
-//        av.setVisit_id(1);
-//        svc.saveAccessVisit(av);
-//        System.out.println("@@@@@@@@@@@@@@Saved the stuff@@@@@@@@@@@@@@@@");
-//        System.out.println("@@@@@@@@@@@@@@Herro, I accessed " + svc.getAccessVisit(1).getAccess_type() + "@@@@@@@@@@@@@@@@@");
+//        AccessPatientService svc = (AccessPatientService)Context.getService(AccessPatientService.class);
+//	AccessPatient av = new AccessPatient();
+//        List<Object[]> something = svc.getDateRangeList(null, null, ActionCriteria.ANY, 4);
+//        
+//        System.out.println("@@@@@@@@@@@@OVER HERE@@@@@@");
+//        for(int i = 0; i < something.size(); i++){
+//            System.out.println("In the loops");
+//            System.out.println(something.get(i)[0]);
+//        }
+//        System.out.println("@@@@@@@@@@@@END HERE@@@@@@");
+        
+        
+        
 
         log.debug("Method: " + method.getName() + ". Before advice called " + (++count) + " time(s) now.");
         String userName = Context.getUserContext().getAuthenticatedUser().getFamilyName();

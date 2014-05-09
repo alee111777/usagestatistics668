@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.openmrs.module.usagestatistics668.AccessPatient;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessPatientDAO;
+import static org.openmrs.module.usagestatistics668.db.hibernate.HibernateAccessVisitDAO.dfSQL;
 
 
 /**
@@ -79,6 +80,38 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
                 System.out.println(sb.toString());
 		return executeSQLQuery(sb.toString());
    }
+   
+   public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT ");
+        sb.append("  patient_id, ");
+        sb.append("  count( * ) AS count ");
+        sb.append("FROM access_patient");
+        sb.append(" WHERE 1=1 ");
+        if (since != null) {
+            sb.append("AND timestamp > '" + dfSQL.format(since) + "' ");
+        }
+        if (until != null) {
+            sb.append("AND timestamp < '" + dfSQL.format(until) + "' ");
+        }
+        //System.out.println(filter);
+        if (filter == ActionCriteria.CREATED) {
+            sb.append("  AND access_type = 'created' ");
+        } else if (filter == ActionCriteria.VIEWED) {
+            sb.append("  AND access_type = 'viewed' ");
+        } else if (filter == ActionCriteria.UPDATED) {
+            sb.append("  AND access_type = 'updated' ");
+        } else if (filter == ActionCriteria.VOIDED) {
+            sb.append("  AND access_type = 'voided' ");
+        } else if (filter == ActionCriteria.UNVOIDED) {
+            sb.append("  AND access_type = 'unvoided' ");
+        }
+        sb.append(" GROUP BY patient_id ");
+        sb.append("ORDER BY count DESC ");
+        sb.append("LIMIT " + maxResults);
+        System.out.println(sb.toString());
+        return executeSQLQuery(sb.toString());
+    }
     
     protected List<Object[]> executeSQLQuery(String sql) {	
 	Session session = sessionFactory.getCurrentSession();
