@@ -33,7 +33,7 @@
 		</property>
 		<property name="mappings">
 			<props>
-				<!--<prop key="module/usagestatistics668/patientAccess.htm">patientAccessController</prop>-->
+				<prop key="module/usagestatistics668/patientAccess.htm">accessPatientController</prop>
                                 <prop key="module/usagestatistics668/accessEncounter.htm">accessEncounterController</prop>
                                 <prop key="module/usagestatistics668/orderAccess.htm">accessOrderController</prop>
                                 <prop key="module/usagestatistics668/visitAccess.htm">accessVisitController</prop>
@@ -55,13 +55,13 @@
         <bean id="accessPatientPieView" class="org.openmrs.module.usagestatistics668.web.view.chart.AccessPatientPieChartView" />
 
 	<!-- ========================= Controllers ========================= -->
-<!--
-	<bean id="patientAccessController" class="org.openmrs.module.usagestatistics668.web.controller.PatientAccessController">
+
+	<bean id="accessPatientController" class="org.openmrs.module.usagestatistics668.web.controller.AccessPatientController">
 		<property name="pageViewName">
-			<value>module/usagestatistics668/patientAccess</value>
+			<value>module/usagestatistics668/accessPatient</value>
 		</property>
 	</bean>  
--->            
+           
         <bean id="accessOrderController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/orderAccess</value>
