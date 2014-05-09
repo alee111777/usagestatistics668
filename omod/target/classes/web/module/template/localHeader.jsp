@@ -10,8 +10,8 @@
 	<li class="test<c:if test='<%= request.getRequestURI().contains("userAccess") %>'> active</c:if>">
 		<a href="userAccess.htm"><spring:message code="usagestatistics668.menu.user"/></a>
 	</li>
-	<li class="test<c:if test='<%= request.getRequestURI().contains("encounterAccess") %>'> active</c:if>">
-		<a href="encounterAccess.htm"><spring:message code="usagestatistics668.menu.encounter"/></a>
+	<li class="test<c:if test='<%= request.getRequestURI().contains("accessEncounter") %>'> active</c:if>">
+		<a href="accessEncounter.htm"><spring:message code="usagestatistics668.menu.encounter"/></a>
 	</li>
 	<li class="test<c:if test='<%= request.getRequestURI().contains("visitAccess") %>'> active</c:if>">
 		<a href="visitAccess.htm"><spring:message code="usagestatistics668.menu.visit"/></a>

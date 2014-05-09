@@ -33,8 +33,8 @@
 		</property>
 		<property name="mappings">
 			<props>
-				<prop key="module/usagestatistics668/patientAccess.htm">accessPatientController</prop>
-                                <prop key="module/usagestatistics668/encounterAccess.htm">accessEncounterController</prop>
+				<!--<prop key="module/usagestatistics668/patientAccess.htm">patientAccessController</prop>-->
+                                <prop key="module/usagestatistics668/accessEncounter.htm">accessEncounterController</prop>
                                 <prop key="module/usagestatistics668/orderAccess.htm">accessOrderController</prop>
                                 <prop key="module/usagestatistics668/visitAccess.htm">accessVisitController</prop>
                                 <prop key="module/usagestatistics668/userAccess.htm">accessUserController</prop>
@@ -55,32 +55,37 @@
         <bean id="accessPatientPieView" class="org.openmrs.module.usagestatistics668.web.view.chart.AccessPatientPieChartView" />
 
 	<!-- ========================= Controllers ========================= -->
-	
-	<bean id="accessPatientController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
+<!--
+	<bean id="patientAccessController" class="org.openmrs.module.usagestatistics668.web.controller.PatientAccessController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/patientAccess</value>
 		</property>
 	</bean>  
+-->            
         <bean id="accessOrderController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/orderAccess</value>
 		</property>
 	</bean> 
-        <bean id="accessEncounterController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
-		<property name="pageViewName">
-			<value>module/usagestatistics668/encounterAccess</value>
-		</property>
-	</bean> 
+   
+        <bean id="accessEncounterController" class="org.openmrs.module.usagestatistics668.web.controller.AccessEncounterController">
+           <property name="pageViewName">
+              <value>module/usagestatistics668/accessEncounter</value>
+           </property>
+        </bean>
+   
         <bean id="accessVisitController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/visitAccess</value>
 		</property>
 	</bean> 
+        
         <bean id="accessUserController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/userAccess</value>
 		</property>
-	</bean> 
+	</bean>
+         
         <bean id="accessChartController" class="org.openmrs.module.usagestatistics668.web.controller.ChartStatsQueryController">
 		<property name="chartViews">
 			<map>
@@ -90,6 +95,7 @@
 			</map>
 		</property>
 	</bean>  
+        
         <bean id="accessPieChartController" class="org.openmrs.module.usagestatistics668.web.controller.ChartStatsQueryController">
 		<property name="chartViews">
 			<map>
@@ -98,51 +104,22 @@
 			</map>
 		</property>
 	</bean>         
+        
         <bean id="accessPatientChartController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/patientChart</value>
 		</property>
 	</bean> 
+        
         <bean id="accessVisitChartController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/visitChart</value>
 		</property>
 	</bean> 
+        
         <bean id="accessEncounterChartController" class="org.openmrs.module.usagestatistics668.web.controller.ExportableStatsQueryController">
 		<property name="pageViewName">
 			<value>module/usagestatistics668/encounterChart</value>
 		</property>
-	</bean> 
-        <!--
-
-    <bean id="basicModuleTabUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-         <property name="order"><value>50</value></property>   
-         -->
-<!-- this will ensure the mapping is loaded before mappings from core
-         we are replacing the core jsp with ours; this is used to replace patient dashboard regimen tab with our tab 
-        <property name="mappings">
-           
-            <props>
-                		<prop key="**/patientExample.portlet">portletController</prop>
-    
-                               
-                                <prop key="**/patientNotes.portlet">MyPatientNotesPortletController</prop>
-                              
-                                The following property is used to override the regimen tab because the key is
-                                the same as the url mapping for regimen portlet in core 
-                                <prop key="**/patientRegimen.portlet">myPatientRegimensPortletController</prop>
-			</props>
- 		</property>
-	</bean>	 
-        
-        <bean id="myPatientRegimensPortletController" class="org.openmrs.module.usagestatistics668.web.controller.PatientRegimensPortletController" />
- 
-        <bean id="MyPatientNotesPortletController" class="org.openmrs.module.usagestatistics668.web.controller.PatientNotesPortletController" />
- 
-	Annotation based controllers 
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-	
-	<context:component-scan base-package="org.openmrs.module.usagestatistics668.web.controller" />
- -->
-		
+	</bean> 	
 </beans>
