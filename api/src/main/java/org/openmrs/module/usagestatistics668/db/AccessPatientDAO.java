@@ -28,7 +28,7 @@ public interface AccessPatientDAO {
 
     public List<Object[]> getMostViewedPatient(Date since, Date until, ActionCriteria filter,int maxResults);
     
-    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults);
+    public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults);
 
 
 }
