@@ -44,19 +44,26 @@
         
 
     <!-- AOP-->
-   <advice>
+    <advice>
         <point>org.openmrs.api.PatientService</point>
         <class>org.openmrs.module.usagestatistics668.advice.PatientServiceAdvice</class>
     </advice>   
-   <advice>
+    <advice>
         <point>org.openmrs.api.EncounterService</point>
         <class>org.openmrs.module.usagestatistics668.advice.EncounterServiceAdvice</class>
-   </advice>    
+    </advice>    
    
     <advice>
         <point>org.openmrs.api.VisitService</point>
         <class>org.openmrs.module.usagestatistics668.advice.VisitServiceAdvice</class>
-   </advice> 
+    </advice> 
+    
+    <!--
+    <advice>
+        <point>org.openmrs.api.PatientService</point>
+        <class>org.openmrs.module.usagestatistics668.advice.CountingBeforeAdvice</class>
+    </advice>
+    -->
  
 
    
@@ -85,12 +92,12 @@
     </messages>
     -->
    
-   <mappingFiles>
-      AccessPatient.hbm.xml 
-      AccessEncounter.hbm.xml
-      AccessVisit.hbm.xml
-   </mappingFiles>
-   <!-- /Internationalization -->
+    <mappingFiles>
+        AccessPatient.hbm.xml 
+        AccessEncounter.hbm.xml
+        AccessVisit.hbm.xml
+    </mappingFiles>
+    <!-- /Internationalization -->
 
 </module>
 

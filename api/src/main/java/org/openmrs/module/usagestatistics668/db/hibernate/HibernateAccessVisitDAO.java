@@ -13,10 +13,13 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.openmrs.Location;
+import org.openmrs.Patient;
+import org.openmrs.User;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.usagestatistics668.AccessVisit;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessVisitDAO;
+import static org.openmrs.module.usagestatistics668.db.hibernate.HibernateAccessEncounterDAO.dfSQL;
 
 /**
  *
@@ -102,29 +105,35 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
         return executeSQLQuery(sb.toString());
     }
 
-    public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException {
+    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT ");
-        sb.append("  `date`, ");
-        sb.append("  SUM(usages) as usages, ");
-        sb.append("  SUM(encounters) as encounters, ");
-        sb.append("  SUM(updates) as updates ");
-        sb.append("FROM " + TABLE_VISIT + " ");
-        sb.append("WHERE 1=1 ");
-
-        if (from != null) {
-            sb.append("  AND date > '" + dfSQL.format(from) + "' ");
+        sb.append("  visit_id, ");
+        sb.append("  count( * ) AS count ");
+        sb.append("FROM access_visit");
+        sb.append(" WHERE 1=1 ");
+        if (since != null) {
+            sb.append("AND timestamp > '" + dfSQL.format(since) + "' ");
         }
         if (until != null) {
-            sb.append("  AND date < '" + dfSQL.format(until) + "' ");
+            sb.append("AND timestamp < '" + dfSQL.format(until) + "' ");
         }
-        if (location != null) {
-            sb.append("  AND location_id = " + location.getLocationId() + " ");
+        //System.out.println(filter);
+        if (filter == ActionCriteria.CREATED) {
+            sb.append("  AND access_type = 'created' ");
+        } else if (filter == ActionCriteria.VIEWED) {
+            sb.append("  AND access_type = 'viewed' ");
+        } else if (filter == ActionCriteria.UPDATED) {
+            sb.append("  AND access_type = 'updated' ");
+        } else if (filter == ActionCriteria.VOIDED) {
+            sb.append("  AND access_type = 'voided' ");
+        } else if (filter == ActionCriteria.UNVOIDED) {
+            sb.append("  AND access_type = 'unvoided' ");
         }
-
-        sb.append("GROUP BY `date` ");
-        sb.append("ORDER BY `date` ASC;");
-
+        sb.append(" GROUP BY visit_id ");
+        sb.append("ORDER BY count DESC ");
+        sb.append("LIMIT " + maxResults);
+        System.out.println(sb.toString());
         return executeSQLQuery(sb.toString());
     }
 

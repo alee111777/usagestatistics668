@@ -7,10 +7,10 @@ package org.openmrs.module.usagestatistics668;
 
 import java.util.Date;
 import java.util.List;
-import org.openmrs.Location;
+import org.openmrs.Patient;
+import org.openmrs.User;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
-import org.openmrs.api.db.DAOException;
 
 /**
  *
@@ -26,6 +26,6 @@ public interface AccessEncounterService extends OpenmrsService {
 
     public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException;
 
-    public List<Object[]> getDateRangeStats(Date from, Date until, Location location) throws DAOException;
+    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults);
 
 }
