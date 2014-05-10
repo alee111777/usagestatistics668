@@ -28,5 +28,5 @@ public interface AccessVisitService extends OpenmrsService {
 
     public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException;
 
-    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults);
+    public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults);
 }

@@ -70,8 +70,8 @@ public class AccessVisitServiceImpl extends BaseOpenmrsService implements Access
         return dao.getMostViewedVisit(since, until, filter, maxResults);
     }
 
-    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults) {
-        return dao.getDateRangeList(since, until, filter, maxResults);
+    public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults) {
+        return dao.getDateRangeList(since, until, patientId, filter, maxResults);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

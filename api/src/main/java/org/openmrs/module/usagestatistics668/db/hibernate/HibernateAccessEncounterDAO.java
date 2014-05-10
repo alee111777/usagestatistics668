@@ -112,20 +112,22 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
      * @param maxResults
      * @return
      */
-    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults) {
+    public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults) {
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT ");
-        sb.append("  encounter_id, ");
-        sb.append("  count( * ) AS count ");
-        sb.append("FROM access_encounter");
-        sb.append(" WHERE 1=1 ");
+        sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
+        sb.append("FROM " + "access_encounter" + " s ");
+        //sb.append("WHERE 1=1 ");
+
+        if (patientId != null) {
+            sb.append("  WHERE s.patient_id=" + patientId.toString());
+        }
         if (since != null) {
-            sb.append("AND timestamp > '" + dfSQL.format(since) + "' ");
+            sb.append("  AND s.timestamp > '" + dfSQL.format(since));
         }
         if (until != null) {
-            sb.append("AND timestamp < '" + dfSQL.format(until) + "' ");
+            sb.append("  AND s.timestamp < '" + dfSQL.format(until));
         }
-        //System.out.println(filter);
+
         if (filter == ActionCriteria.CREATED) {
             sb.append("  AND access_type = 'created' ");
         } else if (filter == ActionCriteria.VIEWED) {
@@ -137,11 +139,27 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
         } else if (filter == ActionCriteria.UNVOIDED) {
             sb.append("  AND access_type = 'unvoided' ");
         }
-        sb.append(" GROUP BY encounter_id ");
-        sb.append("ORDER BY count DESC ");
-        sb.append("LIMIT " + maxResults);
-        System.out.println(sb.toString());
-        return executeSQLQuery(sb.toString());
+
+        sb.append("  ORDER BY s.timestamp DESC ");
+
+        if (maxResults == null) {
+            maxResults = 20;
+        }
+
+        sb.append("LIMIT " + maxResults + ";");
+
+        //System.out.println("**************  " + sb.toString());
+        Session session = sessionFactory.getCurrentSession();
+
+        List<Object> results = sessionFactory.getCurrentSession().createSQLQuery(sb.toString())
+                .addEntity("s", AccessEncounter.class)
+                .list();
+//
+//        int count = ((Number) session.createSQLQuery("SELECT FOUND_ROWS();").uniqueResult()).intValue();
+//        paging.setResultsTotal(count);
+
+        //List<Object> results = new ArrayList<Object>();
+        return results;
     }
 
     protected List<Object[]> executeSQLQuery(String sql) {

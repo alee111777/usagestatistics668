@@ -32,6 +32,6 @@ public interface AccessEncounterDAO {
 
     public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults);
 
-    public List<Object[]> getDateRangeList(Date since, Date until, ActionCriteria filter, int maxResults);
+    public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults);
 
 }
