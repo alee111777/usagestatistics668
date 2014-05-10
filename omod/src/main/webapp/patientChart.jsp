@@ -42,13 +42,13 @@
 	
 </form>
 <b class="boxHeader">
-	<spring:message code="usagestatistics668.summary.title.patient"/>
+	<spring:message code="usagestatistics668.summary.title.barchart"/>
 </b>
 <div class="box" style="text-align: center">
 	<img src="chart.htm?chart=patient&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal}&amp;width=700&amp;height=200" width="700" height="200" />
 </div>
 <b class="boxHeader">
-	<spring:message code="usagestatistics668.summary.title.patient"/>
+	<spring:message code="usagestatistics668.summary.title.piechart"/>
 </b>
 <div class="box" style="text-align: center">
 	<img src="piechart.htm?chart=patient&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal}&amp;width=700&amp;height=200" width="700" height="200" />

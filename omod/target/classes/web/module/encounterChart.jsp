@@ -42,9 +42,16 @@
 	
 </form>
 <b class="boxHeader">
-	<spring:message code="usagestatistics668.summary.title.encounter"/>
+	<spring:message code="usagestatistics668.summary.title.barchart"/>
 </b>
 <div class="box" style="text-align: center">
 	<img src="chart.htm?chart=encounter&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal}&amp;width=700&amp;height=200" width="700" height="200" />
 </div>
+<b class="boxHeader">
+	<spring:message code="usagestatistics668.summary.title.piechart"/>
+</b>
+<div class="box" style="text-align: center">
+	<img src="piechart.htm?chart=encounter&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal}&amp;width=700&amp;height=200" width="700" height="200" />
+</div>
+        
 <%@ include file="/WEB-INF/template/footer.jsp"%>

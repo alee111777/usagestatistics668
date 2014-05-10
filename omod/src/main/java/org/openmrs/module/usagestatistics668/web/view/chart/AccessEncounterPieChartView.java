@@ -25,6 +25,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.usagestatistics668.AccessEncounterService;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.openmrs.module.usagestatistics668.AccessPatientService;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
@@ -34,16 +35,16 @@ import org.openmrs.module.usagestatistics668.util.StatsUtils;
 /**
  * View to render hour/day usage data as a chart image
  */
-public class AccessPatientPieChartView extends AbstractChartView {
+public class AccessEncounterPieChartView extends AbstractChartView {
 
     @Override
     protected JFreeChart createChart(Map<String, Object> model, HttpServletRequest request) {
         System.out.println("---------create pie chart--------------");
 
-        AccessPatientService svc = Context.getService(AccessPatientService.class);
+        AccessEncounterService svc = Context.getService(AccessEncounterService.class);
 
         //Date monthAgo = StatsUtils.addDaysToDate(null, -30);
-        List<Object[]> data = svc.getMostViewedPatient(getFromDate(), getUntilDate(), getUsageFilter(), getMaxResults());
+        List<Object[]> data = svc.getMostViewedEncounter(getFromDate(), getUntilDate(), getUsageFilter(), getMaxResults());
         //List<Object[]> data = svc.getMostViewedPatient(monthAgo, 2);
         String[] categories = new String[data.size()];
         int[] count = new int[data.size()];
@@ -53,25 +54,28 @@ public class AccessPatientPieChartView extends AbstractChartView {
         }
 
         String seriesView = ContextProvider.getMessage("usagestatistics668.summary.any");
-        String title = "Most Accessed Patient Data";
+        String title = "Most Accessed Encounter Data";
         
         if (getUsageFilter() == ActionCriteria.CREATED) {
             seriesView = ContextProvider.getMessage("usagestatistics668.summary.created");
-            title = "Most Created Patient Data";
+            title = "Most Created Encounter Data";
         } else if (getUsageFilter() == ActionCriteria.UPDATED) {
             seriesView = ContextProvider.getMessage("usagestatistics668.summary.updated");
-            title = "Most Updated Patient Data";
+            title = "Most Updated Encounter Data";
         } else if (getUsageFilter() == ActionCriteria.VIEWED) {
             seriesView = ContextProvider.getMessage("usagestatistics668.summary.viewed");
-            title = "Most Vieweded Patient Data";
+            title = "Most Vieweded Encounter Data";
         } else if (getUsageFilter() == ActionCriteria.VOIDED) {
             seriesView = ContextProvider.getMessage("usagestatistics668.summary.voided");
-            title = "Most Voided Patient Data";
+            title = "Most Voided Encounter Data";
         } else if (getUsageFilter() == ActionCriteria.UNVOIDED) {
             seriesView = ContextProvider.getMessage("usagestatistics668.summary.unvoided");
-            title = "Most Unvoided Patient Data";
+            title = "Most Unvoided Encounter Data";
         }
-        
+
+
+        //String seriesView = ContextProvider.getMessage("usagestatistics668.summary.view");
+
         DefaultPieDataset dataset = new DefaultPieDataset();
         for (int c = 0; c < data.size(); c++) {
             dataset.setValue(String.valueOf(data.get(c)[0]), ((BigInteger) data.get(c)[1]).intValue());
@@ -129,4 +133,5 @@ public class AccessPatientPieChartView extends AbstractChartView {
     }
 
 }
+
 
