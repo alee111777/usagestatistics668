@@ -11,7 +11,7 @@
 <b class="boxHeader">
 	<spring:message code="usagestatistics668.encounter.title"/>
 </b>
-<form method="get" class="box">
+<form method="post" class="box">
 
 	<table cellpadding="2" cellspacing="0" width="100%">
 		<tr>
@@ -31,7 +31,9 @@
 				
 				<spring:message code="usagestatistics668.query.type"/>
                                 
-                                <input type="button" onclick="document.usagesForm.userId.value='';document.usagesForm.submit();" value="Submit" /> 
+                                <input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
+                                       
+                               <!-- <input type="button" onclick="document.usagesForm.userId.value='';document.usagesForm.submit();" value="Submit" /> -->
 			</td>
                         <td align="right">
                             <spring:message code="usagestatistics668.quantity.title"/>
