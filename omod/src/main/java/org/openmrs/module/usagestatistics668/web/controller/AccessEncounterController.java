@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
+import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
@@ -24,7 +26,11 @@ import org.springframework.web.context.request.WebRequest;
 public class AccessEncounterController /*extends AbstractController*/ {
 
    private String pageViewName;
-
+   private Date from;
+   private Date until;
+   private int encounterId;
+   private ActionCriteria usageFilter;
+   private int quantityFilter;
    /**
     * Logger for this class and subclasses
     */
@@ -74,13 +80,32 @@ public class AccessEncounterController /*extends AbstractController*/ {
     * @return
     */
    @RequestMapping(method = RequestMethod.POST)
-   public String onSubmit(HttpSession httpSession,
-           @ModelAttribute("anyRequestObject") Object anyRequestObject, BindingResult errors) {
+   public String onSubmit(ModelMap model, HttpSession httpSession,
+	                               @ModelAttribute("anyRequestObject") Object anyRequestObject, BindingResult errors, 
+                                       @RequestParam("from") String from,
+                                       @RequestParam("until") String until,
+                                       @RequestParam("encounterId") String encounterId,
+                                       @RequestParam("usageFilter") String usageFilter,
+                                       @RequestParam("quantityFilter") String quantityFilter){
       System.out.println("POST method***************");
       if (errors.hasErrors()) {
          // return error view
       }
-
+      
+        //this.from = (Date)from;
+        //this.until = (Date)until;
+        if (encounterId != "")
+            this.encounterId = Integer.parseInt(encounterId);
+        //catch ActionCriteria.values()?
+        this.usageFilter = ActionCriteria.values()[Integer.parseInt(usageFilter)];
+        this.quantityFilter = Integer.parseInt(quantityFilter);
+      
+      System.out.println("FROM: " + from);
+      System.out.println("UNTIL: " + until);
+      System.out.println("ENCOUNTERID: " + this.encounterId);
+      System.out.println("USAGEFILTER: " +  this.usageFilter);
+      System.out.println("QUANTITYFILTER: " + this.quantityFilter);
+        
       return SUCCESS_FORM_VIEW;
    }
 

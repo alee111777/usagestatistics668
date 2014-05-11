@@ -10,12 +10,14 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.usagestatistics668.AccessVisit;
+import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
@@ -33,6 +35,11 @@ public class AccessVisitController {
    private final String SUCCESS_FORM_VIEW = "/module/usagestatistics668/accessVisit";
 
    private String pageViewName;
+   private Date from;
+   private Date until;
+   private int visitId;
+   private ActionCriteria usageFilter;
+   private int quantityFilter;
 
    public void setPageViewName(String pageViewName) {
       this.pageViewName = pageViewName;
@@ -78,13 +85,31 @@ public class AccessVisitController {
     * @return
     */
    @RequestMapping(method = RequestMethod.POST)
-   public String onSubmit(HttpSession httpSession,
-           @ModelAttribute("anyRequestObject") Object anyRequestObject, BindingResult errors) {
+      public String onSubmit(ModelMap model, HttpSession httpSession,
+	                               @ModelAttribute("anyRequestObject") Object anyRequestObject, BindingResult errors, 
+                                       @RequestParam("from") String from,
+                                       @RequestParam("until") String until,
+                                       @RequestParam("visitId") String visitId,
+                                       @RequestParam("usageFilter") String usageFilter,
+                                       @RequestParam("quantityFilter") String quantityFilter){
       System.out.println("POST method***************");
       if (errors.hasErrors()) {
          // return error view
       }
-
+      
+        //this.from = (Date)from;
+        //this.until = (Date)until;
+        if (visitId != "")
+            this.visitId = Integer.parseInt(visitId);
+        //catch ActionCriteria.values()?
+        this.usageFilter = ActionCriteria.values()[Integer.parseInt(usageFilter)];
+        this.quantityFilter = Integer.parseInt(quantityFilter);
+      
+      System.out.println("FROM: " + from);
+      System.out.println("UNTIL: " + until);
+      System.out.println("ENCOUNTERID: " + this.visitId);
+      System.out.println("USAGEFILTER: " +  this.usageFilter);
+      System.out.println("QUANTITYFILTER: " + this.quantityFilter);
       return SUCCESS_FORM_VIEW;
    }
 
