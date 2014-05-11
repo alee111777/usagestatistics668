@@ -11,7 +11,7 @@
 <b class="boxHeader">
 	<spring:message code="usagestatistics668.patient.title"/>
 </b>
-<form method="get" class="box">
+<form method="post" class="box">
 
 	<table cellpadding="2" cellspacing="0" width="100%">
 		<tr>
@@ -28,7 +28,7 @@
 				
 				<spring:message code="usagestatistics668.query.type"/>
                                 
-                                <input type="submit" value="Submit" />
+                                <input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
 
 			</td>
                         

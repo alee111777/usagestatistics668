@@ -8,10 +8,10 @@
 
 <select name="${formFieldName}">
 	<c:if test="${showNoQuantity != false}">
-		<option value="0" ${initialValue.ordinal == 0 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.ten"/></option>
+		<option value="10" ${initialValue.ordinal == 10 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.ten"/></option>
 	</c:if>
-	<option value="2" ${initialValue.ordinal == 2 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.twenty"/></option>
-	<option value="3" ${initialValue.ordinal == 2 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.thirty"/></option>
-	<option value="4" ${initialValue.ordinal == 2 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.forty"/></option>
-	<option value="5" ${initialValue.ordinal == 2 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.fifty"/></option>
+	<option value="20" ${initialValue.ordinal == 20 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.twenty"/></option>
+	<option value="30" ${initialValue.ordinal == 30 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.thirty"/></option>
+	<option value="40" ${initialValue.ordinal == 40 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.forty"/></option>
+	<option value="50" ${initialValue.ordinal == 50 ? 'selected="selected"' : ""}><spring:message code="usagestatistics668.quantity.fifty"/></option>
 </select>
