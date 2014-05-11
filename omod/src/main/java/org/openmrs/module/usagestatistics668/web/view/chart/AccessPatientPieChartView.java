@@ -45,6 +45,10 @@ public class AccessPatientPieChartView extends AbstractChartView {
         //Date monthAgo = StatsUtils.addDaysToDate(null, -30);
         List<Object[]> data = svc.getMostViewedPatient(getFromDate(), getUntilDate(), getUsageFilter(), getMaxResults());
         //List<Object[]> data = svc.getMostViewedPatient(monthAgo, 2);
+        
+        
+        System.out.println(getFromDate());
+        
         String[] categories = new String[data.size()];
         int[] count = new int[data.size()];
         for (int i = 0; i < categories.length; i++) {

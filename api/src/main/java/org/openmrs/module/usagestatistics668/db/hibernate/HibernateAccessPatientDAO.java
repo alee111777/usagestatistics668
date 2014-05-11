@@ -90,16 +90,16 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
         sb.append("FROM " + "access_patient" + " s ");
-        //sb.append("WHERE 1=1 ");
+        sb.append("WHERE 1=1 "); //this is so we can add more statements on
 
         if (patientId != null) {
-            sb.append("  WHERE s.patient_id=" + patientId.toString());
+            sb.append("  AND WHERE s.patient_id=" + patientId.toString());
         }
         if (since != null) {
-            sb.append("  AND s.timestamp > '" + dfSQL.format(since));
+            sb.append("  AND s.timestamp > " + dfSQL.format(since));
         }
         if (until != null) {
-            sb.append("  AND s.timestamp < '" + dfSQL.format(until));
+            sb.append("  AND s.timestamp < " + dfSQL.format(until));
         }
 
         if (filter == ActionCriteria.CREATED) {
@@ -122,7 +122,7 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
 
         sb.append("LIMIT " + maxResults + ";");
         
-        //System.out.println("**************  " + sb.toString());
+        System.out.println("**************  " + sb.toString());
 
         Session session = sessionFactory.getCurrentSession();
 
