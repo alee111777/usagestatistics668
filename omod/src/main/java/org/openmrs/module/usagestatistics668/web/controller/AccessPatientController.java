@@ -101,7 +101,7 @@ public class AccessPatientController /*extends AbstractController*/ {
          patient_id = Integer.parseInt(patientId);
       }
 
-      SimpleDateFormat newDate = new SimpleDateFormat("MM/dd/yyyy");
+      SimpleDateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");
       Date since = null;
       if (!"".equals(from)) {
          since = newDate.parse(from);

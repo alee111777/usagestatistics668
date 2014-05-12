@@ -93,13 +93,13 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
         sb.append("WHERE 1=1 "); //this is so we can add more statements on
 
         if (patientId != null) {
-            sb.append("  AND WHERE s.patient_id=" + patientId.toString());
+            sb.append("  AND s.patient_id=" + patientId.toString());
         }
         if (since != null) {
-            sb.append("  AND s.timestamp > " + dfSQL.format(since));
+            sb.append("  AND timestamp > '" + dfSQL.format(since) + "' ");
         }
         if (until != null) {
-            sb.append("  AND s.timestamp < " + dfSQL.format(until));
+            sb.append("  AND timestamp < '" + dfSQL.format(until) + "' ");
         }
 
         if (filter == ActionCriteria.CREATED) {
@@ -114,7 +114,7 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
             sb.append("  AND access_type = 'unvoided' ");
         }
 
-        sb.append("  ORDER BY s.timestamp DESC ");
+        sb.append("  ORDER BY s.timestamp ");
 
         if (maxResults == null) {
             maxResults = 20;
