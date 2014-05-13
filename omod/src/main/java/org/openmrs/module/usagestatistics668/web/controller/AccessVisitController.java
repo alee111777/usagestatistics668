@@ -3,13 +3,18 @@
  */
 package org.openmrs.module.usagestatistics668.web.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.context.Context;
+import org.openmrs.module.usagestatistics668.AccessPatientService;
 import org.openmrs.module.usagestatistics668.AccessVisit;
+import org.openmrs.module.usagestatistics668.AccessVisitService;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -91,25 +96,61 @@ public class AccessVisitController {
                                        @RequestParam("until") String until,
                                        @RequestParam("visitId") String visitId,
                                        @RequestParam("usageFilter") String usageFilter,
-                                       @RequestParam("quantityFilter") String quantityFilter){
+                                       @RequestParam("quantityFilter") String quantityFilter) throws ParseException{
       System.out.println("POST method***************");
       if (errors.hasErrors()) {
          // return error view
       }
-      
+
+      /*
+       try {
+       DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+       this.from = df.parse(from);
+       this.until = df.parse(until);
+       } catch (ParseException e) {
+       e.printStackTrace();
+       }
+       */
         //this.from = (Date)from;
-        //this.until = (Date)until;
-        if (visitId != "")
-            this.visitId = Integer.parseInt(visitId);
-        //catch ActionCriteria.values()?
-        this.usageFilter = ActionCriteria.values()[Integer.parseInt(usageFilter)];
-        this.quantityFilter = Integer.parseInt(quantityFilter);
+      //this.until = (Date)until;
+      Integer patient_id = null;
+      if (!"".equals(visitId)) {
+         patient_id = Integer.parseInt(visitId);
+      }
+
+      SimpleDateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");
+      Date since = null;
+      if (!"".equals(from)) {
+         since = newDate.parse(from);
+      }
+
+      Date til = null;
+      if (!"".equals(until)) {
+         til = newDate.parse(until);
+      }
+
+      ActionCriteria criteria;
+
+      criteria = ActionCriteria.values()[Integer.parseInt(usageFilter)];
+
+      Integer numRows = null;
+      if (!"".equals(quantityFilter)) {
+         numRows = Integer.parseInt(quantityFilter);
+      }
+
+      AccessVisitService avService = Context.getService(AccessVisitService.class);
+      List<Object> visitList = avService.getDateRangeList(since, til, patient_id, criteria, numRows);
+      model.addAttribute("visitList", visitList);
       
-      System.out.println("FROM: " + from);
-      System.out.println("UNTIL: " + until);
-      System.out.println("ENCOUNTERID: " + this.visitId);
-      System.out.println("USAGEFILTER: " +  this.usageFilter);
-      System.out.println("QUANTITYFILTER: " + this.quantityFilter);
+      
+      //String string = "January 2, 2010";
+      //Date date = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(string);
+      //System.out.println(date); // Sat Jan 02 00:00:00 BOT 2010
+      System.out.println("FROM: " + since);
+      System.out.println("UNTIL: " + til);
+      System.out.println("PATIENTID: " + patient_id);
+      System.out.println("USAGEFILTER: " + criteria);
+      System.out.println("QUANTITYFILTER: " + numRows);
       return SUCCESS_FORM_VIEW;
    }
 

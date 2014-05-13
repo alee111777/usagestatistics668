@@ -22,22 +22,21 @@
 				
 				<spring:message code="usagestatistics668.query.forPatient"/>
                                 
-                                <openmrs_tag:patientField formFieldName="patientId" searchLabelCode="Patient.find" initialValue="${model.patient.patientId}" linkUrl="${pageContext.request.contextPath}/admin/patients/patient.form"/>	
-
+                                <input type="text" name="patientId" placeholder="Enter Patient ID"/>
+                                
+                                <spring:message code="usagestatistics668.query.with"/>
+                                
 				<privacy_tag:usageFilter formFieldName="usageFilter" initialValue="${usageFilter}" />
 				
 				<spring:message code="usagestatistics668.query.type"/>
                                 
+                                <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
+                                
+                                <spring:message code="usagestatistics668.quantity.title"/>
+                                
                                 <input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
 
 			</td>
-                        
-                        <td align="right">
-                            <spring:message code="usagestatistics668.quantity.title"/>
-                            <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
-                            <!--Add functionality to this submit button-->
-                            <input type="button" value="Submit" /> 
-                        </td>
 		</tr>
 	</table>
                                 

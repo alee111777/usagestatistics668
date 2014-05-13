@@ -12,14 +12,9 @@ import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.openmrs.Location;
-import org.openmrs.Patient;
-import org.openmrs.User;
-import org.openmrs.api.db.DAOException;
 import org.openmrs.module.usagestatistics668.AccessVisit;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessVisitDAO;
-import static org.openmrs.module.usagestatistics668.db.hibernate.HibernateAccessEncounterDAO.dfSQL;
 
 /**
  *
@@ -109,16 +104,16 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
         sb.append("FROM " + "access_visit" + " s ");
-        //sb.append("WHERE 1=1 ");
+        sb.append("WHERE 1=1 "); //this is so we can add more statements on
 
         if (patientId != null) {
-            sb.append("  WHERE s.patient_id=" + patientId.toString());
+            sb.append("  AND s.patient_id=" + patientId.toString());
         }
         if (since != null) {
-            sb.append("  AND s.timestamp > '" + dfSQL.format(since));
+            sb.append("  AND timestamp > '" + dfSQL.format(since) + "' ");
         }
         if (until != null) {
-            sb.append("  AND s.timestamp < '" + dfSQL.format(until));
+            sb.append("  AND timestamp < '" + dfSQL.format(until) + "' ");
         }
 
         if (filter == ActionCriteria.CREATED) {
@@ -133,7 +128,7 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
             sb.append("  AND access_type = 'unvoided' ");
         }
 
-        sb.append("  ORDER BY s.timestamp DESC ");
+        sb.append("  ORDER BY s.timestamp ");
 
         if (maxResults == null) {
             maxResults = 20;
@@ -141,7 +136,7 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
 
         sb.append("LIMIT " + maxResults + ";");
         
-        //System.out.println("**************  " + sb.toString());
+        System.out.println("**************  " + sb.toString());
 
         Session session = sessionFactory.getCurrentSession();
 
