@@ -30,6 +30,8 @@
 				
 				<spring:message code="usagestatistics668.query.type"/>
                                 
+                                <spring:message code="usagestatistics668.quantity.pretitle"/>
+                                
                                 <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
                                 
                                 <spring:message code="usagestatistics668.quantity.title"/>
