@@ -100,14 +100,14 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
         return executeSQLQuery(sb.toString());
     }
 
-    public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults) {
+    public List<Object> getDateRangeList(Date since, Date until, Integer visitId, ActionCriteria filter, Integer maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
         sb.append("FROM " + "access_visit" + " s ");
         sb.append("WHERE 1=1 "); //this is so we can add more statements on
 
-        if (patientId != null) {
-            sb.append("  AND s.patient_id=" + patientId.toString());
+        if (visitId != null) {
+            sb.append("  AND s.visit_id=" + visitId.toString());
         }
         if (since != null) {
             sb.append("  AND timestamp > '" + dfSQL.format(since) + "' ");
