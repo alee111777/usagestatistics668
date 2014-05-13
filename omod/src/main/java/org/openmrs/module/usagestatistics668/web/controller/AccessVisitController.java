@@ -94,7 +94,7 @@ public class AccessVisitController {
 	                               @ModelAttribute("anyRequestObject") Object anyRequestObject, BindingResult errors, 
                                        @RequestParam("from") String from,
                                        @RequestParam("until") String until,
-                                       @RequestParam("patientId") String patientId,
+                                       @RequestParam("visitId") String visitId,
                                        @RequestParam("usageFilter") String usageFilter,
                                        @RequestParam("quantityFilter") String quantityFilter) throws ParseException{
       System.out.println("POST method***************");
@@ -114,8 +114,8 @@ public class AccessVisitController {
         //this.from = (Date)from;
       //this.until = (Date)until;
       Integer patient_id = null;
-      if (!"".equals(patientId)) {
-         patient_id = Integer.parseInt(patientId);
+      if (!"".equals(visitId)) {
+         patient_id = Integer.parseInt(visitId);
       }
 
       SimpleDateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");

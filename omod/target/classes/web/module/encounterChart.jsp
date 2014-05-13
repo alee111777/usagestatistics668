@@ -26,16 +26,13 @@
 				
 				<spring:message code="usagestatistics668.query.type"/>
                                 
+                                <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
+                                
+                                <spring:message code="usagestatistics668.quantity.title"/>
+                                
                                 <input type="submit" value=<spring:message code="usagestatistics668.query.update" />
 
 			</td>
-                        
-                        <td align="right">
-                            <spring:message code="usagestatistics668.quantity.title"/>
-                            <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
-                            <!--Add functionality to this submit button-->
-                            <input type="button" value=<spring:message code="usagestatistics668.query.update" /> 
-                        </td>
 		</tr>
 	</table>		
 	

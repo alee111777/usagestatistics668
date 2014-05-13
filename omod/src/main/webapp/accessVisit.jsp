@@ -21,26 +21,21 @@
 				<privacy_tag:dateRange fromField="from" fromValue="${from}" untilField="until" untilValue="${until}" />
 				
 				<spring:message code="usagestatistics668.query.forVisit"/>
-
-                                <%--<openmrs_tag:visitField formVisitName="visitId" searchLabelCode="Visit.find" initialValue="${model.visit.visitId}" linkUrl="${pageContext.request.contextPath}/admin/visits/visit.form"/>--%>
                                 
-                                <openmrs_tag:patientField formFieldName="patientId" searchLabelCode="Patient.find" initialValue="${model.patient.patientId}" linkUrl="${pageContext.request.contextPath}/admin/patients/patient.form"/>
-                                <!--<input style="width: 16px" type="button" class="smallButton" id="clearUserBtn" onclick="document.usagesForm.patientId.value='';document.usagesForm.submit();" value="X" />-->
-				
+                                <input type="text" formFieldName="visitId" placeholder="Enter Visit ID"/>
+                                
                                 <spring:message code="usagestatistics668.query.with"/>
 				
 				<privacy_tag:usageFilter formFieldName="usageFilter" initialValue="${usageFilter}" />
 				
 				<spring:message code="usagestatistics668.query.type"/>
                                 
+                                <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
+                                
+                                <spring:message code="usagestatistics668.quantity.title"/>
+                                
                                 <input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
 			</td>
-                        <td align="right">
-                            <spring:message code="usagestatistics668.quantity.title"/>
-                            <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
-                            <!--Add functionality to this submit button-->
-                            <input type="button" value="Submit" /> 
-                        </td>
 <!--			<td align="right">
 				<input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
 				<input type="submit" name="export" value="<spring:message code="usagestatistics668.query.export"/>" />
