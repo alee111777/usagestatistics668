@@ -22,7 +22,7 @@
 				
 				<spring:message code="usagestatistics668.query.forPatient"/>
                                 
-                                <input type="text" formFieldName="patientId" placeholder="Enter Patient ID"/>
+                                <input type="text" name="patientId" placeholder="Enter Patient ID"/>
                                 
                                 <spring:message code="usagestatistics668.query.with"/>
                                 

@@ -22,7 +22,7 @@
 				
 				<spring:message code="usagestatistics668.query.forEncounter"/>
                                 
-                                <input type="text" formFieldName="encounterId" placeholder="Enter Encounter ID"/>
+                                <input type="text" name="encounterId" placeholder="Enter Encounter ID"/>
                                 
                                 <spring:message code="usagestatistics668.query.with"/>
 				
