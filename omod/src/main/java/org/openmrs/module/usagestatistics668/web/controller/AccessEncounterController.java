@@ -123,8 +123,8 @@ public class AccessEncounterController /*extends AbstractController*/ {
       }
 
       AccessEncounterService aeService = Context.getService(AccessEncounterService.class);
-      List<Object> patientList = aeService.getDateRangeList(since, til, encounter_id, criteria, numRows);
-      model.addAttribute("patientList", patientList);
+      List<Object> encounterList = aeService.getDateRangeList(since, til, encounter_id, criteria, numRows);
+      model.addAttribute("encounterList", encounterList);
       
       
       //String string = "January 2, 2010";
