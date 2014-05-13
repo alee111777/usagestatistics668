@@ -18,8 +18,10 @@ import org.openmrs.Patient;
 import org.openmrs.User;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
+import org.openmrs.module.usagestatistics668.AccessPatient;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessEncounterDAO;
+import static org.openmrs.module.usagestatistics668.db.hibernate.HibernateAccessPatientDAO.dfSQL;
 
 /**
  *
@@ -104,28 +106,20 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
         return executeSQLQuery(sb.toString());
     }
 
-    /**
-     *
-     * @param since
-     * @param until
-     * @param filter
-     * @param maxResults
-     * @return
-     */
     public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
         sb.append("FROM " + "access_encounter" + " s ");
-        //sb.append("WHERE 1=1 ");
+        sb.append("WHERE 1=1 "); //this is so we can add more statements on
 
         if (patientId != null) {
-            sb.append("  WHERE s.patient_id=" + patientId.toString());
+            sb.append("  AND s.patient_id=" + patientId.toString());
         }
         if (since != null) {
-            sb.append("  AND s.timestamp > '" + dfSQL.format(since));
+            sb.append("  AND timestamp > '" + dfSQL.format(since) + "' ");
         }
         if (until != null) {
-            sb.append("  AND s.timestamp < '" + dfSQL.format(until));
+            sb.append("  AND timestamp < '" + dfSQL.format(until) + "' ");
         }
 
         if (filter == ActionCriteria.CREATED) {
@@ -140,15 +134,16 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
             sb.append("  AND access_type = 'unvoided' ");
         }
 
-        sb.append("  ORDER BY s.timestamp DESC ");
+        sb.append("  ORDER BY s.timestamp ");
 
         if (maxResults == null) {
             maxResults = 20;
         }
 
         sb.append("LIMIT " + maxResults + ";");
+        
+        System.out.println("**************  " + sb.toString());
 
-        //System.out.println("**************  " + sb.toString());
         Session session = sessionFactory.getCurrentSession();
 
         List<Object> results = sessionFactory.getCurrentSession().createSQLQuery(sb.toString())
@@ -157,7 +152,7 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
 //
 //        int count = ((Number) session.createSQLQuery("SELECT FOUND_ROWS();").uniqueResult()).intValue();
 //        paging.setResultsTotal(count);
-
+        
         //List<Object> results = new ArrayList<Object>();
         return results;
     }
