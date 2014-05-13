@@ -67,7 +67,7 @@ public class AccessEncounterController /*extends AbstractController*/ {
     * @param errors
     * @param from
     * @param until
-    * @param patientId
+    * @param encounterId
     * @param usageFilter
     * @param quantityFilter
     * @return
@@ -78,14 +78,14 @@ public class AccessEncounterController /*extends AbstractController*/ {
 	                               @ModelAttribute("anyRequestObject") Object anyRequestObject, BindingResult errors, 
                                        @RequestParam("from") String from,
                                        @RequestParam("until") String until,
-                                       /*@RequestParam("patientId") String patientId,*/
+                                       @RequestParam("encounterId") String encounterId,
                                        @RequestParam("usageFilter") String usageFilter,
                                        @RequestParam("quantityFilter") String quantityFilter) throws ParseException{
      System.out.println("POST method***************");
       if (errors.hasErrors()) {
          // return error view
       }
-      String patientId = "2";
+      //String patientId = "2";
       /*
        try {
        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
@@ -97,9 +97,9 @@ public class AccessEncounterController /*extends AbstractController*/ {
        */
       //this.from = (Date)from;
       //this.until = (Date)until;
-      Integer patient_id = null;
-      if (!"".equals(patientId)) {
-         patient_id = Integer.parseInt(patientId);
+      Integer encounter_id = null;
+      if (!"".equals(encounterId)) {
+         encounter_id = Integer.parseInt(encounterId);
       }
 
       SimpleDateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -123,7 +123,7 @@ public class AccessEncounterController /*extends AbstractController*/ {
       }
 
       AccessEncounterService aeService = Context.getService(AccessEncounterService.class);
-      List<Object> patientList = aeService.getDateRangeList(since, til, patient_id, criteria, numRows);
+      List<Object> patientList = aeService.getDateRangeList(since, til, encounter_id, criteria, numRows);
       model.addAttribute("patientList", patientList);
       
       
@@ -132,7 +132,7 @@ public class AccessEncounterController /*extends AbstractController*/ {
       //System.out.println(date); // Sat Jan 02 00:00:00 BOT 2010
       System.out.println("FROM: " + since);
       System.out.println("UNTIL: " + til);
-      System.out.println("PATIENTID: " + patient_id);
+      System.out.println("ENCOUNTERID: " + encounter_id);
       System.out.println("USAGEFILTER: " + criteria);
       System.out.println("QUANTITYFILTER: " + numRows);
       return SUCCESS_FORM_VIEW;

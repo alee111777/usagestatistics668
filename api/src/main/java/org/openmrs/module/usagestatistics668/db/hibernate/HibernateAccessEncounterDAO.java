@@ -106,14 +106,14 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
         return executeSQLQuery(sb.toString());
     }
 
-    public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults) {
+    public List<Object> getDateRangeList(Date since, Date until, Integer encounterId, ActionCriteria filter, Integer maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
         sb.append("FROM " + "access_encounter" + " s ");
         sb.append("WHERE 1=1 "); //this is so we can add more statements on
 
-        if (patientId != null) {
-            sb.append("  AND s.patient_id=" + patientId.toString());
+        if (encounterId != null) {
+            sb.append("  AND s.encounter_id=" + encounterId.toString());
         }
         if (since != null) {
             sb.append("  AND timestamp > '" + dfSQL.format(since) + "' ");
