@@ -1,8 +1,6 @@
 <!-- Written by: Kirill -->
 <%@ include file="/WEB-INF/template/include.jsp"%>
 
-<!--<openmrs:require privilege="View Patient Privacy Records" otherwise="/login.htm" redirect="/module/usagestatistics/users.htm"/>-->
-
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
 <%@ include file="template/localHeader.jsp" %>
@@ -30,16 +28,14 @@
 				
 				<spring:message code="usagestatistics668.query.type"/>
                                 
+                                <spring:message code="usagestatistics668.quantity.pretitle"/>                               
+                                
                                 <privacy_tag:quantityFilter formFieldName="quantityFilter" initialValue="${quantityFilter}" />
                                 
                                 <spring:message code="usagestatistics668.quantity.title"/>
                                 
                                 <input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
 			</td>
-<!--			<td align="right">
-				<input type="submit" value="<spring:message code="usagestatistics668.query.update"/>" />
-				<input type="submit" name="export" value="<spring:message code="usagestatistics668.query.export"/>" />
-			</td>-->
 		</tr>
 	</table>
 		
