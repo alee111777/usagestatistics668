@@ -24,7 +24,14 @@ public class EncounterServiceAdvice implements MethodBeforeAdvice, AfterReturnin
    private int count = 0;
 
    protected UsageLog.Type usageType;
-
+   
+   /**
+    * need this method to get certain parameters
+    * @param method
+    * @param args
+    * @param target
+    * @throws Throwable 
+    */
    public void before(Method method, Object[] args, Object target) throws Throwable {
       System.out.println("before aop, method name: " + method.getName());
 
@@ -35,9 +42,7 @@ public class EncounterServiceAdvice implements MethodBeforeAdvice, AfterReturnin
             usageType = UsageLog.Type.CREATED;
          } else if (encounter.isVoided()) {
             AccessEncounterService svc = (AccessEncounterService) Context.getService(AccessEncounterService.class);
-				// Encounter object is voided, but check database record
-            //if (!svc.isEncounterVoidedInDatabase(encounter))
-            //usageType = UsageLog.Type.VOIDED;
+
          }
       } else if (method.getName().equals("createEncounter") || method.getName().equals("unvoidEncounter")) {
          usageType = UsageLog.Type.CREATED;
@@ -53,7 +58,7 @@ public class EncounterServiceAdvice implements MethodBeforeAdvice, AfterReturnin
          usageType = UsageLog.Type.VIEWED;
          UsageLog.logEvent(patient, usageType, null);
       }
-      //log.debug("Method: " + method.getName() + ". After advice called " + (++count) + " time(s) now.");
+   
       if (method.getName().equals("saveEncounter")
               || method.getName().equals("updateEncounter")
               || method.getName().equals("createEncounter")

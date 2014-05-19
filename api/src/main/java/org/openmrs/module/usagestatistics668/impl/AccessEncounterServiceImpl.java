@@ -54,31 +54,48 @@ public class AccessEncounterServiceImpl extends BaseOpenmrsService implements Ac
     }
 
     /**
+     * see AccessEncounter service
      * @param id
-     * @return
-     * @see
-     * org.openmrs.module.patientnotes.NoteService#getNote(java.lang.Integer)
+     * @return AccessEncounter
      */
     @Transactional(readOnly = true)
     public AccessEncounter getAccessEncounter(Integer id) {
         return dao.getAccessEncounter(id);
     }
 
+    /**
+     * see AccessEncounterService
+     * @param accessEncounter
+     * @throws APIException 
+     */
     public void saveAccessEncounter(AccessEncounter accessEncounter) throws APIException {
         dao.saveAccessEncounter(accessEncounter);
     }
 
-    public List<AccessEncounter> getMostRecent(int numOfEncounters) {
-        return dao.getMostRecent(numOfEncounters);
-    }
-
+    /**
+     * see AccessEncounterService
+     * @param since
+     * @param until
+     * @param filter
+     * @param maxResults
+     * @return List of AccessEncounter id's with number of access
+     * @throws APIException 
+     */
     public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException {
         return dao.getMostViewedEncounter(since, until, filter, maxResults);
     }
 
+    /**
+     * see AccessEncounterService
+     * @param since
+     * @param until
+     * @param patientId
+     * @param filter
+     * @param maxResults
+     * @return List of AccessEncounters
+     */
     public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults) {
         return dao.getDateRangeList(since, until, patientId, filter, maxResults);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
