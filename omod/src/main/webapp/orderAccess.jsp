@@ -1,8 +1,6 @@
 <!-- Written by: Michael -->
 <%@ include file="/WEB-INF/template/include.jsp"%>
 
-<!--<openmrs:require privilege="View Patient Privacy Records" otherwise="/login.htm" redirect="/module/usagestatistics/users.htm"/>-->
-
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
 <%@ include file="template/localHeader.jsp" %>

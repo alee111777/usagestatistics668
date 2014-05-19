@@ -1,8 +1,6 @@
 <!-- Written by: Kirill -->
 <%@ include file="/WEB-INF/template/include.jsp"%>
 
-<!--<openmrs:require privilege="View Patient Privacy Records" otherwise="/login.htm" redirect="/module/usagestatistics/users.htm"/>-->
-
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
 <%@ include file="template/localHeader.jsp" %>
@@ -48,7 +46,6 @@
 			<th align="center"><spring:message code="usagestatistics668.results.date"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.user"/></th>
 			<th align="center"><spring:message code="usagestatistics668.results.patient"/></th>
-			<!--<th align="center"><spring:message code="usagestatistics668.results.void"/></th>-->
 		</tr>
 
                 <c:forEach items="${patientList}" var="row" varStatus="rowStatus" >
@@ -69,16 +66,4 @@
 
 </form>
 
-<!--
-<br/>
-
-<b class="boxHeader">
-	<spring:message code="usagestatistics668.results.patient"/>
-</b>
-<div class="box" style="text-align: center">
-	<img src="chart.htm?chart=patient&amp;from=${privacy:formatDate(from)}&amp;until=${privacy:formatDate(until)}&amp;usageFilter=${usageFilter.ordinal};width=700&amp;height=200" width="700" height="200" />
-</div>
-
-<br/>       
--->
 <%@ include file="/WEB-INF/template/footer.jsp"%>
