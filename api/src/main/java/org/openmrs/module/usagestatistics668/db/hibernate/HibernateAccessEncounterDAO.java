@@ -12,16 +12,9 @@ import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.openmrs.Encounter;
-import org.openmrs.Location;
-import org.openmrs.Patient;
-import org.openmrs.User;
-import org.openmrs.api.db.DAOException;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
-import org.openmrs.module.usagestatistics668.AccessPatient;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessEncounterDAO;
-import static org.openmrs.module.usagestatistics668.db.hibernate.HibernateAccessPatientDAO.dfSQL;
 
 /**
  *
@@ -49,31 +42,33 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
+    
+    /**
+     * see AccessEncounterService
+     * @param id
+     * @return AccessEncounter
+     */
     public AccessEncounter getAccessEncounter(Integer id) {
         return (AccessEncounter) sessionFactory.getCurrentSession().get(AccessEncounter.class, id);
     }
 
+    /**
+     * see AccessEncounterService
+     * @param accessEncounter 
+     */
     public void saveAccessEncounter(AccessEncounter accessEncounter) {
         sessionFactory.getCurrentSession().saveOrUpdate(accessEncounter);
     }
 
-    public List<AccessEncounter> getMostRecent(int numOfEncounters) {
-        Criteria query = sessionFactory.getCurrentSession().createCriteria(AccessEncounter.class);
-        StringBuffer sb = new StringBuffer();
-        sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
-        sb.append("FROM access_encounter s ");
-        sb.append("WHERE 1=1 ");
-        sb.append("LIMIT 10");
-
-        List<AccessEncounter> results = sessionFactory.getCurrentSession().createSQLQuery(sb.toString())
-                .addEntity("s", AccessEncounter.class)
-                .list();
-
-        return results;
-
-    }
-
+    /**
+     * this function is called by the AccessEncounter service
+     * see AccessEncounterService
+     * @param since
+     * @param until
+     * @param filter
+     * @param maxResults
+     * @return List of AccessEncounter id's with their number of access
+     */
     public List<Object[]> getMostViewedEncounter(Date since, Date until, ActionCriteria filter, int maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT ");
@@ -105,7 +100,16 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
         System.out.println(sb.toString());
         return executeSQLQuery(sb.toString());
     }
-
+    
+    /**
+     * this function is called by AccessEncounterService
+     * @param since
+     * @param until
+     * @param encounterId
+     * @param filter
+     * @param maxResults
+     * @return List of AccessEncounters
+     */
     public List<Object> getDateRangeList(Date since, Date until, Integer encounterId, ActionCriteria filter, Integer maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
@@ -149,14 +153,15 @@ public class HibernateAccessEncounterDAO implements AccessEncounterDAO {
         List<Object> results = sessionFactory.getCurrentSession().createSQLQuery(sb.toString())
                 .addEntity("s", AccessEncounter.class)
                 .list();
-//
-//        int count = ((Number) session.createSQLQuery("SELECT FOUND_ROWS();").uniqueResult()).intValue();
-//        paging.setResultsTotal(count);
         
-        //List<Object> results = new ArrayList<Object>();
         return results;
     }
 
+    /**
+     * this function is for sending a sql query to the DB
+     * @param sql
+     * @return List<Object>
+     */
     protected List<Object[]> executeSQLQuery(String sql) {
         Session session = sessionFactory.getCurrentSession();
         SQLQuery query = session.createSQLQuery(sql);
