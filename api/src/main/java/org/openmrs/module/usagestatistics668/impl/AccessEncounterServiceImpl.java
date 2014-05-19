@@ -12,7 +12,6 @@ import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
 import org.openmrs.module.usagestatistics668.AccessEncounterService;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
-import org.openmrs.module.usagestatistics668.NoteService;
 import org.openmrs.module.usagestatistics668.db.AccessEncounterDAO;
 import org.springframework.transaction.annotation.Transactional;
 

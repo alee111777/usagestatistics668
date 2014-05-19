@@ -38,7 +38,7 @@
             location_id int(20) NOT NULL,
          PRIMARY KEY(id)
          )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-          
+       
           CREATE TABLE IF NOT EXISTS access_patient (
             id int(10) NOT NULL auto_increment,
             timestamp datetime NOT NULL,
