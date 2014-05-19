@@ -12,7 +12,6 @@
 package org.openmrs.module.usagestatistics668.web.view.chart;
 
 import java.math.BigInteger;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,26 +22,27 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.openmrs.api.context.Context;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.openmrs.module.usagestatistics668.AccessVisitService;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.util.ContextProvider;
-import org.openmrs.module.usagestatistics668.util.StatsUtils;
 
 /**
- * View to render hour/day usage data as a chart image
+ * View to render visit data as a bar chart image
+ * @author: Ye Cheng
  */
 public class AccessVisitChartView extends AbstractChartView {
 
+    /**
+     * create bar chart for visit data
+     * @param model model build for view
+     * @param request
+     * @return JFREEChart for viewing encounter data
+     */    
     @Override
     protected JFreeChart createChart(Map<String, Object> model, HttpServletRequest request) {
-        System.out.println("---------create chart--------------");
-
         AccessVisitService svc = Context.getService(AccessVisitService.class);
 
-        //Date monthAgo = StatsUtils.addDaysToDate(null, -30);
         List<Object[]> data = svc.getMostViewedVisit(getFromDate(), getUntilDate(), getUsageFilter(), getMaxResults());
-        //List<Object[]> data = svc.getMostViewedPatient(monthAgo, 2);
         String[] categories = new String[data.size()];
         int[] count = new int[data.size()];
         for (int i = 0; i < categories.length; i++) {

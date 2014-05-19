@@ -25,13 +25,15 @@ import org.springframework.web.servlet.View;
 
 /**
  * Controller for views that return chart images
+ * @ author: Ye Cheng
  */
 public class ChartStatsQueryController extends StatsQueryController {
 	
 	private Map<String, View> chartViews = new HashMap<String, View>();
 
 	/**
-	 * @see StatsQueryController
+	 * create ModelAndView using the model built
+         * @see StatsQueryController
 	 */
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {

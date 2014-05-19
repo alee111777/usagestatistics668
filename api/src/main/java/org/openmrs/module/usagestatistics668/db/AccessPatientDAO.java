@@ -13,21 +13,49 @@ import org.openmrs.module.usagestatistics668.AccessPatient;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 
 /**
- *
- * @author Ye
- */
-/**
  * This is the DAO interface. This is never used by the developer, but instead
  * the {@link NoteService} calls it (and developers call the NoteService)
+ * @author Ye Cheng
  */
+
 public interface AccessPatientDAO {
 
-   public AccessPatient getAccessPatient(Integer id);
-   
-   public void saveAccessPatient(AccessPatient accessPatient)throws DAOException;
+   /**
+    * get AccessPatient object
+    * see AccessPatientService
+    * @param id
+    * @return AccessPatient object
+    */
+    public AccessPatient getAccessPatient(Integer id);
 
+    /**
+     * save AccessPatient object
+     * see AccessPatientService
+     * @param accessPatient the AccessPatient object to save
+     */
+    public void saveAccessPatient(AccessPatient accessPatient)throws DAOException;
+
+    /**
+     * get the most viewed patient data
+     * see AccessPatientService
+     * @param since
+     * @param until
+     * @param filter
+     * @param maxResults
+     * @return 
+     */
     public List<Object[]> getMostViewedPatient(Date since, Date until, ActionCriteria filter,int maxResults);
     
+    /**
+     * get patient data being accessed during a period of time
+     * see AccessPatientService
+     * @param since
+     * @param until
+     * @param patientId
+     * @param filter
+     * @param maxResults
+     * @return 
+     */
     public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults);
 
 

@@ -32,7 +32,8 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
 /**
- * Base class for views that render usage data as a comma separated values
+ * Base class for views that render usage data
+ * @author: Ye Cheng
  */
 public abstract class AbstractChartView extends AbstractView {
 	
@@ -46,7 +47,7 @@ public abstract class AbstractChartView extends AbstractView {
         private Date untilInclusive;
 	private ActionCriteria usageFilter;
         private int maxResults;
-	//private Location location;
+
 
 	/**
 	 * @see org.springframework.web.servlet.view.AbstractView
@@ -71,7 +72,6 @@ public abstract class AbstractChartView extends AbstractView {
 		until = (Date)model.get("until");
 		untilInclusive = (Date)model.get("untilInclusive");
 		usageFilter = (ActionCriteria)model.get("usageFilter");
-		//location = (Location)model.get("location");
 		
 		JFreeChart chart = createChart(model, request);
 		chart.setBackgroundPaint(Color.WHITE);
@@ -124,14 +124,6 @@ public abstract class AbstractChartView extends AbstractView {
 	public ActionCriteria getUsageFilter() {
 		return usageFilter;
 	}
-	
-	/**
-	 * Gets the location
-	 * @return the location
-	 */
-	//protected Location getLocation() {
-	//	return location;
-	//}
 	
 	/**
 	 * Gets the font for chart rendering

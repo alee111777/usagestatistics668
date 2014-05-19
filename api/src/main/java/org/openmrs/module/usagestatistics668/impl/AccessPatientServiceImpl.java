@@ -27,10 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * </code>
  *
- */
-/**
- *
- * @author Ye
+ * @author Ye Cheng
  */
 public class AccessPatientServiceImpl extends BaseOpenmrsService implements AccessPatientService {
 
@@ -51,21 +48,49 @@ public class AccessPatientServiceImpl extends BaseOpenmrsService implements Acce
         this.dao = dao;
     }
 
+    /**
+     * see AccessPatientSerivce
+     * @param id
+     * @return accessPatient
+     */
     @Transactional(readOnly = true)
     public AccessPatient getAccessPatient(Integer id) {
         return dao.getAccessPatient(id);
     }
 
+    /**
+     * see AccessPatientService
+     * @param accessPatient
+     * @throws APIException 
+     */
     @Override
     public void saveAccessPatient(AccessPatient accessPatient) throws APIException {
         dao.saveAccessPatient(accessPatient);
     }
 
+    /**
+     * see AccessPatientService
+     * @param since
+     * @param until
+     * @param filter
+     * @param maxResults
+     * @return List of AccessPatient id's with number of access
+     * @throws APIException 
+     */
     @Override
     public List<Object[]> getMostViewedPatient(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException {
         return dao.getMostViewedPatient(since, until, filter, maxResults);
     }
     
+    /**
+     * see AccessPatientService
+     * @param since
+     * @param until
+     * @param patientId
+     * @param filter
+     * @param maxResults
+     * @return List of AccessPatient
+     */
     public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults){
         return dao.getDateRangeList(since, until, patientId,  filter, maxResults);
     }

@@ -34,6 +34,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
 
 /**
  * Abstract base class for statistical query controllers
+ * @author: Ye Cheng
  */
 public abstract class StatsQueryController extends AbstractController {
 	
@@ -41,11 +42,17 @@ public abstract class StatsQueryController extends AbstractController {
 	
 	private Date from, until, untilInclusive;
         private int maxResults;
-	//private Location location;
 	private ActionCriteria usageFilter;
 	private PagingInfo paging;
 	
-	protected final Map<String, Object> buildModel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	/**
+         * build model for view
+         * @param request
+         * @param response
+         * @return Map object for model
+         * @throws Exception 
+         */
+        protected final Map<String, Object> buildModel(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		// Default from date is one week ago from last midnight
@@ -56,7 +63,6 @@ public abstract class StatsQueryController extends AbstractController {
 		from = StatsUtils.getDateParameter(request, "from", weekAgo);
 		until = StatsUtils.getDateParameter(request, "until", lastMidnight);
                 maxResults = ServletRequestUtils.getIntParameter(request, "maxResults", 5);
-                //maxResults = 2;
                 usageFilter = StatsUtils.getActionCriteriaParameter(request, "usageFilter", ActionCriteria.ANY);
 		
 		// Calculate inclusive until date by adding a day
@@ -73,11 +79,6 @@ public abstract class StatsQueryController extends AbstractController {
 		model.put("untilInclusive", untilInclusive);
 		model.put("usageFilter", usageFilter);
 		model.put("paging", paging);
-		
-		// Get location parameter if it exists
-		//int locationId = ServletRequestUtils.getIntParameter(request, "locationId", 0);
-		//location = (locationId > 0) ? Context.getLocationService().getLocation(locationId) : null;
-		//model.put("location", location);
 		
 		return model;
 	}
@@ -118,14 +119,6 @@ public abstract class StatsQueryController extends AbstractController {
 	}
 	
 	/**
-	 * Gets the location
-	 * @return the location
-	 */
-	//protected Location getLocation() {
-	//	return location;
-	//}
-	
-	/**
 	 * Gets the usage filter
 	 * @return the usage filter
 	 */
@@ -140,7 +133,12 @@ public abstract class StatsQueryController extends AbstractController {
 	protected PagingInfo getPagingInfo() {
 		return paging;
 	}
-	protected int getMaxResults() {
+	
+        /**
+         * get the maximum of results it will return
+         * @return the maximum number of results
+         */
+        protected int getMaxResults() {
 		return maxResults;
 	}
 }

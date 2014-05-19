@@ -27,19 +27,22 @@ import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.util.ContextProvider;
 
 /**
- * View to render hour/day usage data as a chart image
+ * View to render encounter data as a bar chart image
+ * @author: Ye Cheng
  */
 public class AccessEncounterChartView extends AbstractChartView {
 
+    /**
+     * create bar chart for encounter data
+     * @param model model build for view
+     * @param request
+     * @return JFREEChart for viewing encounter data
+     */
     @Override
     protected JFreeChart createChart(Map<String, Object> model, HttpServletRequest request) {
-        System.out.println("---------create chart--------------");
 
         AccessEncounterService svc = Context.getService(AccessEncounterService.class);
-
-        //Date monthAgo = StatsUtils.addDaysToDate(null, -30);
         List<Object[]> data = svc.getMostViewedEncounter(getFromDate(), getUntilDate(), getUsageFilter(), getMaxResults());
-        //List<Object[]> data = svc.getMostViewedPatient(monthAgo, 2);
         String[] categories = new String[data.size()];
         int[] count = new int[data.size()];
         for (int i = 0; i < categories.length; i++) {

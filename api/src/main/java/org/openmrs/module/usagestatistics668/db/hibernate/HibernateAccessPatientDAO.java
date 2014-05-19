@@ -21,7 +21,7 @@ import static org.openmrs.module.usagestatistics668.db.hibernate.HibernateAccess
 
 /**
  *
- * @author Ye
+ * @author Ye Cheng
  */
 public class HibernateAccessPatientDAO implements AccessPatientDAO {
 
@@ -46,14 +46,33 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * see AccessPatientService
+     * @param id
+     * @return AccessPatient
+     */
     public AccessPatient getAccessPatient(Integer id) {
         return (AccessPatient) sessionFactory.getCurrentSession().get(AccessPatient.class, id);
     }
 
+    /**
+     * see AccessPatientService
+     * @param accessPatient 
+     */
     public void saveAccessPatient(AccessPatient accessPatient) {
         sessionFactory.getCurrentSession().saveOrUpdate(accessPatient);
     }
 
+    /**
+     * This function is called by the AccessPatient service
+     * This function uses SQL query to get the most viewed patients
+     * see AccessPatientService
+     * @param since starting time of data access
+     * @param until ending time of data access
+     * @param filter action type of the data access
+     * @param maxResults number of record it returns
+     * @return List of AccessPatient id's with their number of access
+     */
     public List<Object[]> getMostViewedPatient(Date since, Date until, ActionCriteria filter, int maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT ");
@@ -67,7 +86,6 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
         if (until != null) {
             sb.append("AND timestamp < '" + dfSQL.format(until) + "' ");
         }
-        System.out.println(filter);
         if (filter == ActionCriteria.CREATED) {
             sb.append("  AND access_type = 'created' ");
         } else if (filter == ActionCriteria.VIEWED) {
@@ -82,10 +100,21 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
         sb.append(" GROUP BY patient_id ");
         sb.append("ORDER BY count DESC ");
         sb.append("LIMIT " + maxResults);
-        System.out.println(sb.toString());
         return executeSQLQuery(sb.toString());
     }
 
+    /**
+     * This function is called by the AccessPatient service
+     * This function uses SQL query to get patient data being accessed
+     * during a period of time
+     * see AccessPatientService
+     * @param since starting time of data access
+     * @param until ending time of data access
+     * @param patientId patient id
+     * @param filter action type of data access
+     * @param maxResults number of records it returns
+     * @return List of AccessPatients
+     */
     public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
@@ -120,20 +149,12 @@ public class HibernateAccessPatientDAO implements AccessPatientDAO {
             maxResults = 20;
         }
 
-        sb.append("LIMIT " + maxResults + ";");
-        
-        System.out.println("**************  " + sb.toString());
-
         Session session = sessionFactory.getCurrentSession();
 
         List<Object> results = sessionFactory.getCurrentSession().createSQLQuery(sb.toString())
                 .addEntity("s", AccessPatient.class)
                 .list();
-//
-//        int count = ((Number) session.createSQLQuery("SELECT FOUND_ROWS();").uniqueResult()).intValue();
-//        paging.setResultsTotal(count);
-        
-        //List<Object> results = new ArrayList<Object>();
+
         return results;
     }
 

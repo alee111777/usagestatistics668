@@ -14,7 +14,7 @@ import org.springframework.aop.MethodBeforeAdvice;
 
 
 /**
- * 
+ * AOP class used to intercept and log calls to PatientService methods
  * @author Ye
  */
 public class PatientServiceAdvice implements MethodBeforeAdvice, AfterReturningAdvice {
@@ -25,6 +25,13 @@ public class PatientServiceAdvice implements MethodBeforeAdvice, AfterReturningA
     
     protected UsageLog.Type usageType;
     
+   /**
+    * this method is used to log method name and parameters before the method is used
+    * @param method method to log
+    * @param args arguments passed to this method
+    * @param target the target of this method
+    * @throws Throwable 
+    */
     public void before(Method method, Object[] args, Object target) throws Throwable {
         System.out.println("before aop, method name: " + method.getName());
 
@@ -36,9 +43,6 @@ public class PatientServiceAdvice implements MethodBeforeAdvice, AfterReturningA
                 usageType = UsageLog.Type.CREATED;
             else if (patient.isVoided()) {
 		AccessPatientService svc = (AccessPatientService)Context.getService(AccessPatientService.class);
-				// Patient object is voided, but check database record
-				//if (!svc.isPatientVoidedInDatabase(patient))
-					//usageType = UsageLog.Type.VOIDED;
             }			
 	}
 	else if (method.getName().equals("createPatient")||method.getName().equals("unvoidPatient"))
@@ -47,6 +51,15 @@ public class PatientServiceAdvice implements MethodBeforeAdvice, AfterReturningA
                 usageType = UsageLog.Type.VOIDED;
     }
 
+    /**
+    * this method is used to log method name, parameters and return values 
+    * after the method is used
+    * @param method method to log
+    * @param args arguments passed to this method
+    * @param target the target of this method
+    * @param returnValue the return value of this method
+    * @throws Throwable 
+    */
     public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
         System.out.println("after aop, method name: " + method.getName());
         if (method.getName().equals("getPatient")){
@@ -54,7 +67,6 @@ public class PatientServiceAdvice implements MethodBeforeAdvice, AfterReturningA
             usageType = UsageLog.Type.VIEWED;
             UsageLog.logEvent(patient, usageType, null);
         }
-        //log.debug("Method: " + method.getName() + ". After advice called " + (++count) + " time(s) now.");
         if (method.getName().equals("savePatient")
             || method.getName().equals("updatePatient")
             || method.getName().equals("createPatient")

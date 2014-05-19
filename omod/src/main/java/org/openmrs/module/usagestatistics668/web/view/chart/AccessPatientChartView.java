@@ -12,7 +12,6 @@
 package org.openmrs.module.usagestatistics668.web.view.chart;
 
 import java.math.BigInteger;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,27 +21,27 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 import org.openmrs.api.context.Context;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.openmrs.module.usagestatistics668.AccessPatientService;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.util.ContextProvider;
-import org.openmrs.module.usagestatistics668.util.StatsUtils;
 
 /**
- * View to render hour/day usage data as a chart image
+ * View to render patient data as a bar chart image
+ * @author: Ye Cheng
  */
 public class AccessPatientChartView extends AbstractChartView {
 
+    /**
+     * create bar chart for patient data
+     * @param model model build for view
+     * @param request
+     * @return JFREEChart for viewing encounter data
+     */
     @Override
     protected JFreeChart createChart(Map<String, Object> model, HttpServletRequest request) {
-        System.out.println("---------create chart--------------");
 
         AccessPatientService svc = Context.getService(AccessPatientService.class);
-
-        //Date monthAgo = StatsUtils.addDaysToDate(null, -30);
         List<Object[]> data = svc.getMostViewedPatient(getFromDate(), getUntilDate(), getUsageFilter(), getMaxResults());
         //List<Object[]> data = svc.getMostViewedPatient(monthAgo, 2);
         String[] categories = new String[data.size()];
@@ -67,7 +66,6 @@ public class AccessPatientChartView extends AbstractChartView {
 
         String yAxisLabel = ContextProvider.getMessage("usagestatistics668.summary.count");
         String xAxisLabel = ContextProvider.getMessage("usagestatistics668.summary.patient");
-        //String seriesView = ContextProvider.getMessage("usagestatistics668.summary.view");
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int c = 0; c < data.size(); c++) {

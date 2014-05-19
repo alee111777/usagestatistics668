@@ -16,6 +16,7 @@ import org.springframework.aop.MethodBeforeAdvice;
 
 /**
  * AOP class used to intercept and log calls to EncounterService methods
+ * @author: Anthony Lee
  */
 public class EncounterServiceAdvice implements MethodBeforeAdvice, AfterReturningAdvice  {
 
