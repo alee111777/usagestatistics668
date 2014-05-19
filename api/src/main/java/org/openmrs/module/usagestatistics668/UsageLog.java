@@ -14,11 +14,11 @@
 package org.openmrs.module.usagestatistics668;
 
 /**
- * author: Ye
+ * This class sets the action type of data access, call the service and saves the data access
+ * to the database.
+ * @author: Ye Cheng
  */
 import java.util.Date;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Encounter;
@@ -26,8 +26,6 @@ import org.openmrs.Patient;
 import org.openmrs.User;
 import org.openmrs.Visit;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.usagestatistics668.util.StatsUtils;
-import org.openmrs.util.OpenmrsConstants;
 
 /**
  * Class to handle logging of patient record usage
@@ -47,15 +45,14 @@ public class UsageLog {
 	}
 	
 	/**
-	 * Logs a usage event
+	 * Logs a usage event for patient data
 	 * @param patient the patient
 	 * @param type the type of usage event
 	 * @param query the search query used to find this patient
 	 */
 	public static void logEvent(Patient patient, Type type, String query) {
 		User user = Context.getAuthenticatedUser();
-		
-		//logEvent(user, patient, null, type, query);
+
                 AccessPatientService svc = (AccessPatientService)Context.getService(AccessPatientService.class);
 		AccessPatient ap = new AccessPatient();
 		
@@ -78,22 +75,17 @@ public class UsageLog {
                 ap.setUser_id(user.getUserId());
                 ap.setPatient_id(patient.getPersonId());
 	        svc.saveAccessPatient(ap);
-                System.out.println("---------------access patient data saved------------");
-                //testing
-                Date monthAgo = StatsUtils.addDaysToDate(null, -30);
-                //int patient_id = (Integer)svc.getMostViewedPatient(monthAgo, 2).get(0)[0];
-                //System.out.println(patient_id);
-                //end of testing
 	}
 	
 	/**
 	 * Logs a usage event
 	 * @param encounter the encounter
+	 * @param type the type of usage event
+	 * @param query the search query used to find this encounter
 	 */
 	public static void logEvent(Encounter encounter, Type type, String query) {
 		User user = Context.getAuthenticatedUser();
 		
-		//logEvent(user, patient, null, type, query);
                 AccessEncounterService svc = (AccessEncounterService)Context.getService(AccessEncounterService.class);
 		AccessEncounter ae = new AccessEncounter();
 		
@@ -121,25 +113,17 @@ public class UsageLog {
                 }
                 else ae.setLocation_id(null);
 	        svc.saveAccessEncounter(ae);
-                System.out.println("---------------access encounter data saved------------");
-                
-                //testing
-                Date monthAgo = StatsUtils.addDaysToDate(null, -30);
-                //int patient_id = (Integer)svc.getMostViewedEncounter(monthAgo, 2).get(0)[0];
-                //System.out.println(patient_id);
-                //end of testing
 	}
 	
 	/**
 	 * Logs a usage event
-    * @param visit
-    * @param type
-    * @param query
+	 * @param visit the visit
+	 * @param type the type of usage event
+	 * @param query the search query used to find this visit
 	 */
 	public static void logEvent(Visit visit, Type type, String query) {
 		User user = Context.getAuthenticatedUser();
-		
-		//logEvent(user, patient, null, type, query);
+
                 AccessVisitService svc = (AccessVisitService)Context.getService(AccessVisitService.class);
 		AccessVisit ap = new AccessVisit();
 		
@@ -164,13 +148,7 @@ public class UsageLog {
                 ap.setLocation_id(visit.getLocation().getLocationId());
                 ap.setPatient_id(visit.getPatient().getPatientId());
 	        svc.saveAccessVisit(ap);
-                System.out.println("---------------access visit data saved------------");
-                
-                //testing
-                Date monthAgo = StatsUtils.addDaysToDate(null, -30);
-                //int patient_id = (Integer)svc.getMostViewedVisit(monthAgo, 2).get(0)[0];
-                //System.out.println(patient_id);
-                //end of testing
+
 	}
 }
 

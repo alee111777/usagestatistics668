@@ -9,8 +9,8 @@ package org.openmrs.module.usagestatistics668;
 import java.util.Date;
 
 /**
- *
- * @author Ye
+ * This is the POJO class for access_patient table
+ * @author Ye Cheng
  */
 public class AccessPatient{
     
@@ -19,9 +19,7 @@ public class AccessPatient{
     protected String access_type;
     protected Integer user_id;
     protected Integer patient_id;
-    //protected Integer location_id;
-    
-    //Default constructor
+
     public AccessPatient(){}
     
    public Integer getId() { return this.id; }
@@ -38,8 +36,5 @@ public class AccessPatient{
    
    public Integer getUser_id() { return this.user_id; }
    public void setUser_id(Integer user_id) { this.user_id = user_id; }
-   
-   //public Integer getLocation_id() { return this.location_id; }
-   //public void setLocation_id(Integer location_id) { this.location_id = location_id; }
 }
 
