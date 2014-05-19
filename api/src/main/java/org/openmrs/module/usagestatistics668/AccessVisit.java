@@ -9,7 +9,7 @@ package org.openmrs.module.usagestatistics668;
 import java.util.Date;
 
 /**
- *
+ * This is the POJO class for access_visit table
  * @author jonathan
  */
 public class AccessVisit {

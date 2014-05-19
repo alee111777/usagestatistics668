@@ -2,12 +2,8 @@ package org.openmrs.module.usagestatistics668.impl;
 
 import java.util.Date;
 import java.util.List;
-import org.openmrs.Location;
-import org.openmrs.Patient;
-import org.openmrs.User;
 
 import org.openmrs.api.APIException;
-import org.openmrs.api.db.DAOException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.usagestatistics668.AccessEncounter;
 import org.openmrs.module.usagestatistics668.AccessEncounterService;

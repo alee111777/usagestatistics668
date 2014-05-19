@@ -16,7 +16,7 @@ import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 
 /**
- *
+ * AOP class used to intercept and log calls to VisitService methods
  * @author Jonathan
  */
 public class VisitServiceAdvice implements MethodBeforeAdvice, AfterReturningAdvice {
@@ -27,10 +27,16 @@ public class VisitServiceAdvice implements MethodBeforeAdvice, AfterReturningAdv
 
     protected UsageLog.Type usageType;
 
+    /**
+     * This is to log the saveVisit method before the method is called.  Will
+     * save the method name and the parameters used in the method.
+     * @param method
+     * @param args
+     * @param target
+     * @throws Throwable 
+     */
     public void before(Method method, Object[] args, Object target) throws Throwable {
         
-        System.out.println("@@@@@@@@@@@#####after aop, method name: " + method.getName());
-
         if (method.getName().equals("saveVisit") || method.getName().equals("updateVisit")) {
             Visit visit = (Visit) args[0];
             usageType = UsageLog.Type.UPDATED;
@@ -38,9 +44,6 @@ public class VisitServiceAdvice implements MethodBeforeAdvice, AfterReturningAdv
                 usageType = UsageLog.Type.CREATED;
             } else if (visit.isVoided()) {
                 AccessVisitService svc = (AccessVisitService) Context.getService(AccessVisitService.class);
-				// Patient object is voided, but check database record
-                //if (!svc.isPatientVoidedInDatabase(patient))
-                //usageType = UsageLog.Type.VOIDED;
             }
         } else if (method.getName().equals("createVisit") || method.getName().equals("unvoidVisit")) {
             usageType = UsageLog.Type.CREATED;
@@ -49,6 +52,15 @@ public class VisitServiceAdvice implements MethodBeforeAdvice, AfterReturningAdv
         }
     }
 
+    /**
+     * This is to log information after the method is called.  The method name,
+     * parameters, and return values will be logged.
+     * @param returnValue
+     * @param method
+     * @param args
+     * @param target
+     * @throws Throwable 
+     */
     public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
         System.out.println("after aop, method name: " + method.getName());
         if (method.getName().equals("getVisit")) {
@@ -56,7 +68,7 @@ public class VisitServiceAdvice implements MethodBeforeAdvice, AfterReturningAdv
             usageType = UsageLog.Type.VIEWED;
             UsageLog.logEvent(visit, usageType, null);
         }
-        //log.debug("Method: " + method.getName() + ". After advice called " + (++count) + " time(s) now.");
+        
         if (method.getName().equals("saveVisit")
                 || method.getName().equals("updateVisit")
                 || method.getName().equals("createVisit")

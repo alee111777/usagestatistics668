@@ -6,18 +6,14 @@
 package org.openmrs.module.usagestatistics668.db.hibernate;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.openmrs.module.usagestatistics668.AccessEncounter;
 import org.openmrs.module.usagestatistics668.AccessPatient;
 import org.openmrs.module.usagestatistics668.ActionCriteria;
 import org.openmrs.module.usagestatistics668.db.AccessPatientDAO;
-import static org.openmrs.module.usagestatistics668.db.hibernate.HibernateAccessVisitDAO.dfSQL;
 
 /**
  *

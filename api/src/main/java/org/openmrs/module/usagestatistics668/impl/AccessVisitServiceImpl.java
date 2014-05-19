@@ -2,11 +2,7 @@ package org.openmrs.module.usagestatistics668.impl;
 
 import java.util.Date;
 import java.util.List;
-import org.openmrs.Location;
-import org.openmrs.Patient;
-import org.openmrs.User;
 import org.openmrs.api.APIException;
-import org.openmrs.api.db.DAOException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.usagestatistics668.AccessVisit;
 import org.openmrs.module.usagestatistics668.AccessVisitService;
@@ -30,12 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
  *   Context.getService(AccessPatientService.class).saveAccessPatient(accessPatient)...
  *
  * </code>
- *
- */
-/**
- *
  * @author Jonathan
  */
+
 public class AccessVisitServiceImpl extends BaseOpenmrsService implements AccessVisitService {
 
     /**
@@ -55,29 +48,59 @@ public class AccessVisitServiceImpl extends BaseOpenmrsService implements Access
         this.dao = dao;
     }
 
+    /**
+     * see AccessVisitService
+     * @param id
+     * @return 
+     */
     @Transactional(readOnly = true)
     public AccessVisit getAccessVisit(Integer id) {
         return dao.getAccessVisit(id);
     }
 
+    /**
+     * see AccessVisitService
+     * @param accessVisit
+     * @throws APIException 
+     */
     @Override
     public void saveAccessVisit(AccessVisit accessVisit) throws APIException {
         dao.saveAccessVisit(accessVisit);
     }
 
+    /**
+     * see AccessVisitService
+     * @param since
+     * @param until
+     * @param filter
+     * @param maxResults
+     * @return
+     * @throws APIException 
+     */
     @Override
     public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter, int maxResults) throws APIException {
         return dao.getMostViewedVisit(since, until, filter, maxResults);
     }
 
+    /**
+     * see AccessVisitService
+     * @param since
+     * @param until
+     * @param patientId
+     * @param filter
+     * @param maxResults
+     * @return 
+     */
     public List<Object> getDateRangeList(Date since, Date until, Integer patientId, ActionCriteria filter, Integer maxResults) {
-        return dao.getDateRangeList(since, until, patientId, filter, maxResults);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dao.getDateRangeList(since, until, patientId, filter, maxResults);    
     }
 
+    /**
+     * see AccessVisitService
+     * @param numOfVisits
+     * @return 
+     */
     public List<AccessVisit> getMostRecent(int numOfVisits) {
-
-        return dao.getMostRecent(numOfVisits);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dao.getMostRecent(numOfVisits);  
     }
 }

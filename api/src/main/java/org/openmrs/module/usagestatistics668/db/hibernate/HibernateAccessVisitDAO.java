@@ -44,14 +44,28 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * see AccessVisitService
+     * @param id
+     * @return 
+     */
     public AccessVisit getAccessVisit(Integer id) {
         return (AccessVisit) sessionFactory.getCurrentSession().get(AccessVisit.class, id);
     }
 
+    /**
+     * see AccessVisitService
+     * @param accessVisit 
+     */
     public void saveAccessVisit(AccessVisit accessVisit) {
         sessionFactory.getCurrentSession().saveOrUpdate(accessVisit);
     }
 
+    /**
+     * Uses sql code to grab the most recently accessed patient data.
+     * @param numOfVisits
+     * @return 
+     */
     public List<AccessVisit> getMostRecent(int numOfVisits) {
         Criteria query = sessionFactory.getCurrentSession().createCriteria(AccessVisit.class);
         StringBuffer sb = new StringBuffer();
@@ -68,6 +82,15 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
 
     }
 
+    /**
+     * Uses the parameters given to grab the most viewed patient data.  If any
+     * of the parameters are null, they will not be included in the search.
+     * @param since
+     * @param until
+     * @param filter
+     * @param maxResults
+     * @return 
+     */
     public List<Object[]> getMostViewedVisit(Date since, Date until, ActionCriteria filter, int maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT ");
@@ -100,6 +123,16 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
         return executeSQLQuery(sb.toString());
     }
 
+    /**
+     * Uses the parameters to grab table entries.  If any of the parameters are
+     * null, they will not be included in the search.
+     * @param since
+     * @param until
+     * @param visitId
+     * @param filter
+     * @param maxResults
+     * @return 
+     */
     public List<Object> getDateRangeList(Date since, Date until, Integer visitId, ActionCriteria filter, Integer maxResults) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT SQL_CALC_FOUND_ROWS {s.*} ");
@@ -143,14 +176,15 @@ public class HibernateAccessVisitDAO implements AccessVisitDAO {
         List<Object> results = sessionFactory.getCurrentSession().createSQLQuery(sb.toString())
                 .addEntity("s", AccessVisit.class)
                 .list();
-//
-//        int count = ((Number) session.createSQLQuery("SELECT FOUND_ROWS();").uniqueResult()).intValue();
-//        paging.setResultsTotal(count);
         
-        //List<Object> results = new ArrayList<Object>();
         return results;
     }
 
+    /**
+     * 
+     * @param sql
+     * @return 
+     */
     protected List<Object[]> executeSQLQuery(String sql) {
         Session session = sessionFactory.getCurrentSession();
         SQLQuery query = session.createSQLQuery(sql);
