@@ -1,0 +1,7 @@
+org.openmrs.module.usagestatistics668
+org.openmrs.module.usagestatistics668.advice
+org.openmrs.module.usagestatistics668.db
+org.openmrs.module.usagestatistics668.db.hibernate
+org.openmrs.module.usagestatistics668.extension.html
+org.openmrs.module.usagestatistics668.impl
+org.openmrs.module.usagestatistics668.util

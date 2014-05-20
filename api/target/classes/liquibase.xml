@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+ 
+    <!--
+    	See http://wiki.openmrs.org/display/docs/Module+liquibase+Filef or 
+    	documentation on this file.
+    
+        See http://www.liquibase.org/manual/home#available_database_refactorings
+        for a list of supported elements and attributes
+    -->
+ 
+ 	<!-- Uncomment this and edit the values below to use this file
+ 	
+	<changeSet id="patient" author="ycheng">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="access_patient"/></not>
+		</preConditions>
+		<comment>
+			Creating the access_patient table
+		</comment>
+		<createTable tableName="access_patient">
+			<column name="access_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="date" type="varchar(255)"/>
+			<column name="time" type="varchar(255)"/>
+			<column name="action" type="varchar(255)" />
+                        <column name="user_id" type="int"/>
+                        <column name="patient_id" type="int"/>
+                        <column name="location_id" type="int"/>
+		</createTable>
+    </changeSet>
+    	<changeSet id="order" author="ycheng">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="access_order"/></not>
+		</preConditions>
+		<comment>
+			Creating the access_order table
+		</comment>
+		<createTable tableName="access_order">
+			<column name="access_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="date" type="varchar(255)"/>
+			<column name="time" type="varchar(255)"/>
+			<column name="order_id" type="int"/>
+			<column name="action" type="varchar(255)" />
+                        <column name="user_id" type="int"/>
+                        <column name="patient_id" type="int"/>
+                        <column name="location_id" type="int"/>
+		</createTable>
+    </changeSet>
+    
+     -->
+ 
+</databaseChangeLog>
